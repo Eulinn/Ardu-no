@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 class Main():
     def __init__(self):
         if(self.VerificarDriver()):
-            self.Chrome.get("https://www.instagram.com/accounts/login/")
+            self.Chrome.get("https://www.instagram.com/accounts/login")
             
             
         else:

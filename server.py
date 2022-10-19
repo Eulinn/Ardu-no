@@ -1,17 +1,22 @@
-import socket
+import socket,threading
 
 
 class Main():
+
+    def Componetes(self):
+        self.lista_clientes = {}
+
+
     def server(self):
         try:
             self.serverP = socket.socket()
             self.serverP.bind((socket.gethostname(),2306))
-            self.serverP.listen(0)
+            self.serverP.listen()
 
         except:
             print("Servidor não aberto")
 
-
+    def loop(self):
         while True:
  
             client, addr = self.serverP.accept()
@@ -26,3 +31,6 @@ class Main():
 
             print("Conexão encerrada com o aruduíno!")
             client.close()
+
+
+Main().start()
