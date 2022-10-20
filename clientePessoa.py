@@ -1,9 +1,9 @@
-import socket
+import socket,sys
 from _thread import *
 
 class Main():
     def __init__(self) -> None:
-        self.erros=['Arduino inexistente ou não conectado',
+        self.mensagens=['Arduino inexistente ou não conectado',
         "Enviado"]
 
 
@@ -29,9 +29,7 @@ class Main():
             while True:
                 msg2 = self.serverP.recv(32).decode()
                 if msg2:
-                    print(msg2)
-                    self.erros[int(msg2)]
+                    print(self.mensagens[int(msg2)])
                     break
 
 
-Main().start()

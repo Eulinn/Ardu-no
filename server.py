@@ -29,9 +29,7 @@ class Main():
 
     def loop(self):
         while True:
-            print("aceitadno")
             client, addr = self.serverP.accept()
-            print("recebendo")
             mensagem_arduino = client.recv(32).decode("utf-8")
             
             if len(mensagem_arduino) == 0:
@@ -49,23 +47,18 @@ class Main():
             
 
     def controleCLiente(self,cliente,a):
-        print("eulinhoo")
         while True:
             msg = cliente.recv(32)
             if msg:
-                print("entrou")
                 try:
-                    self.arduino["AD"].send(msg)
-                    print("arduine mandade")
+                    self.arduino["AD"].send(msg) #Envia mandamento pro arduino
                     while True:
-                        print("arduine esperande")
-                        if self.arduino["AD"].recv(32):
-                            print("arduine recebide")
-                            cliente.send(self.arduino["AD"].recv(32))
-                            print("arduine cliente mandande")
+                        msg_volta = self.arduino["AD"].recv(32)#espera uma mensagem  do arduino sendo boa ou ruim
+                        if msg_volta:
+                            cliente.send(msg_volta)
                             break
                 except:
-                    cliente.send("1".encode())
+                    cliente.send("0".encode())
                     print("mandou pro cliente")
 
 
