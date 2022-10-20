@@ -1,19 +1,24 @@
-import socket,threading
 
+import socket
+from _thread import *
 
 class Main():
+    def __init__(self) -> None:
+        self.arduino = {}
+        self.clientes = []
 
+    def mensagemClientes(self):
+        pass
+ 
     def start(self):
         if(self.server()):
             self.loop()
 
-    def Componetes(self):
-        self.lista_clientes = {}
 
 
     def server(self):
         try:
-            self.serverP = socket.socket()
+            self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.serverP.bind((socket.gethostname(),2306))
             self.serverP.listen()
             return True
@@ -24,23 +29,54 @@ class Main():
 
     def loop(self):
         while True:
- 
+            print("aceitadno")
             client, addr = self.serverP.accept()
+            print("recebendo")
+            mensagem_arduino = client.recv(32).decode("utf-8")
+            
+            if len(mensagem_arduino) == 0:
+                client.close()
 
-            while True:
-                mensagem_arduino = client.recv(32)
-        
-                if len(mensagem_arduino) == 0: break
+            elif str(mensagem_arduino) == "AD":
+                self.arduino["AD"] = client
+            
+            elif str(mensagem_arduino) == "CL":
+                self.clientes.append(client)
+                start_new_thread(self.controleCLiente,(client,0))
+            
 
-                elif str(mensagem_arduino).decode("utf-8") == "ad":
-                    self.lista_clientes['AD'] = client
-                
-                else:
-                    self.lista_clientes["CL"] = client
-                    
 
-            print("Conexão encerrada com o aruduíno!")
-            client.close()
+            
+
+    def controleCLiente(self,cliente,a):
+        print("eulinhoo")
+        while True:
+            msg = cliente.recv(32)
+            if msg:
+                print("entrou")
+                try:
+                    self.arduino["AD"].send(msg)
+                    print("arduine mandade")
+                    while True:
+                        print("arduine esperande")
+                        if self.arduino["AD"].recv(32):
+                            print("arduine recebide")
+                            cliente.send(self.arduino["AD"].recv(32))
+                            print("arduine cliente mandande")
+                            break
+                except:
+                    cliente.send("1".encode())
+                    print("mandou pro cliente")
+
+
+            
+
+    
+
+
+
+
+            
 
 
 Main().start()
