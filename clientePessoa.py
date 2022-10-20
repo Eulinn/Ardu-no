@@ -4,7 +4,10 @@ from _thread import *
 class Main():
     def __init__(self) -> None:
         self.mensagens=['Arduino inexistente ou não conectado',
-        "Enviado"]
+        "Enviado",
+        "Conectando ao server",
+        "Server conectado",
+        "Servidor Não Conectado"]
 
 
     def start(self):
@@ -16,11 +19,10 @@ class Main():
             self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.serverP.connect((socket.gethostname(),2306))
             self.serverP.send("CL".encode())
-            return True
-
+            return 3
+ 
         except:
-            print("Servidor não aberto")
-            return False
+            return 4
 
     def loop(self):
         while True:
