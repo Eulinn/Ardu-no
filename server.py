@@ -3,6 +3,10 @@ import socket,threading
 
 class Main():
 
+    def start(self):
+        if(self.server()):
+            self.loop()
+
     def Componetes(self):
         self.lista_clientes = {}
 
@@ -12,9 +16,11 @@ class Main():
             self.serverP = socket.socket()
             self.serverP.bind((socket.gethostname(),2306))
             self.serverP.listen()
+            return True
 
         except:
             print("Servidor não aberto")
+            return False
 
     def loop(self):
         while True:
@@ -26,8 +32,12 @@ class Main():
         
                 if len(mensagem_arduino) == 0: break
 
+                elif str(mensagem_arduino).decode("utf-8") == "ad":
+                    self.lista_clientes['AD'] = client
+                
                 else:
-                    print(mensagem_arduino)
+                    self.lista_clientes["CL"] = client
+                    
 
             print("Conexão encerrada com o aruduíno!")
             client.close()
