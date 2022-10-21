@@ -89,7 +89,7 @@ class MainWindow(QMainWindow):
         # EXTRA RIGHT BOX
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
-        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
