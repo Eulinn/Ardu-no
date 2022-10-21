@@ -13,10 +13,11 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-
+from _thread import *
 import sys
 import os
 import platform
+import socket
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -30,6 +31,14 @@ widgets = None
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        self.mensagens=['Arduino inexistente ou não conectado!!',
+        "Enviado",
+        "Conectando ao server...",
+        "Server conectado, vá para a aba de controles!",
+        "Servidor Não Conectado, tentando conectar novamente!"]
+
+
+
         QMainWindow.__init__(self)
 
         # SET AS GLOBAL WIDGETS
@@ -46,7 +55,7 @@ class MainWindow(QMainWindow):
         # APP NAME
         # ///////////////////////////////////////////////////////////////
         title = "Controle De Arduino"
-        description = "Controle Arduino Python - Euler"
+        description = self.mensagens[2]
         # APPLY TEXTS
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
@@ -104,6 +113,8 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
+        start_new_thread(self.server,(widgets,""))
+
 
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
@@ -127,8 +138,6 @@ class MainWindow(QMainWindow):
 
         
 
-
-
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
     def resizeEvent(self, event):
@@ -140,6 +149,24 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         # SET DRAG POS WINDOW
         self.dragPos = event.globalPos()
+    
+
+    
+    def server(self,widgets,a):
+        contador = 1
+        while True:
+            try:
+                self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                self.serverP.connect((socket.gethostname(),2306))
+                self.serverP.send("CL".encode())
+                widgets.titleRightInfo.setText(self.mensagens[3])
+                break
+    
+            except:
+                widgets.titleRightInfo.setText(self.mensagens[4]+f' Tentativa - {contador}')
+                contador+=1
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

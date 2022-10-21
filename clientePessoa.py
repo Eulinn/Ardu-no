@@ -35,3 +35,4 @@ class Main():
                     break
 
 
+Main().start()
