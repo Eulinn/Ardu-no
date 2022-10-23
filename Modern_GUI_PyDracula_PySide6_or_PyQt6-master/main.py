@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
 
         # QTableWidget PARAMETERS
         # ///////////////////////////////////////////////////////////////
-        widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        '''widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)'''
 
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
@@ -136,6 +136,7 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
+        
         
 
     # RESIZE EVENTS

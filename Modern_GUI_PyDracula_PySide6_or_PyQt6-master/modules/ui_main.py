@@ -956,6 +956,29 @@ class Ui_MainWindow(object):
 "background-position: center;\n"
 "background-repeat: no-repeat;")
         self.stackedWidget.addWidget(self.home)
+
+
+
+
+
+
+
+
+
+
+
+#AQUI TEMOS A TELA DE CONTROLE -----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
         self.widgets.setStyleSheet(u"b")
@@ -990,7 +1013,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
 
 
-        #AQUI TEMOS A TELA DE CONTROLE ------------------
+        
 
 
         self.labelBoxBlenderInstalation = QLabel(self.frame_title_wid_1)
@@ -1003,7 +1026,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_17.addWidget(self.frame_title_wid_1)
 
-        self.frame_content_wid_1 = QFrame(self.frame_div_content_1)
+#COMEÇA AQUI ------------------------
+
+
+        '''self.frame_content_wid_1 = QFrame(self.frame_div_content_1)
         self.frame_content_wid_1.setObjectName(u"frame_content_wid_1")
         self.frame_content_wid_1.setFrameShape(QFrame.NoFrame)
         self.frame_content_wid_1.setFrameShadow(QFrame.Raised)
@@ -1015,7 +1041,7 @@ class Ui_MainWindow(object):
         self.lineEdit = QLineEdit(self.frame_content_wid_1)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setMinimumSize(QSize(0, 30))
-        self.lineEdit.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit.setStyleSheet(u"background-color: rgb(33, 37, 43);")#guardar--------------
 
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
 
@@ -1033,7 +1059,7 @@ class Ui_MainWindow(object):
 
         self.labelVersion_3 = QLabel(self.frame_content_wid_1)
         self.labelVersion_3.setObjectName(u"labelVersion_3")
-        self.labelVersion_3.setStyleSheet(u"color: rgb(113, 126, 149);")
+        self.labelVersion_3.setStyleSheet(u"color: rgb(113, 126, 149)")
         self.labelVersion_3.setLineWidth(1)
         self.labelVersion_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
@@ -1167,8 +1193,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_19.addLayout(self.gridLayout_2)
 
 
-        self.verticalLayout.addWidget(self.row_2)
+        self.verticalLayout.addWidget(self.row_2)'''
 
+
+        '''
         self.row_3 = QFrame(self.widgets)
         self.row_3.setObjectName(u"row_3")
         self.row_3.setMinimumSize(QSize(0, 150))
@@ -1302,7 +1330,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.row_3)
 
-        self.stackedWidget.addWidget(self.widgets)
+        self.stackedWidget.addWidget(self.widgets)'''
         self.new_page = QWidget()
         self.new_page.setObjectName(u"new_page")
         self.verticalLayout_20 = QVBoxLayout(self.new_page)
@@ -1504,7 +1532,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"Aparelhos Conectados".upper(), None))
-        self.lineEdit.setText("")
+        '''self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Open", None))
         self.labelVersion_3.setText(QCoreApplication.translate("MainWindow", u"Label description", None))
@@ -1515,8 +1543,8 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(2, QCoreApplication.translate("MainWindow", u"Test 3", None))
 
         self.commandLinkButton.setText(QCoreApplication.translate("MainWindow", u"Link Button", None))
-        self.commandLinkButton.setDescription(QCoreApplication.translate("MainWindow", u"Link description", None))
-        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        self.commandLinkButton.setDescription(QCoreApplication.translate("MainWindow", u"Link description", None))'''
+        '''___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"1", None));
@@ -1567,7 +1595,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Cell", None));
         ___qtablewidgetitem23 = self.tableWidget.item(0, 3)
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
-        self.tableWidget.setSortingEnabled(__sortingEnabled)
+        self.tableWidget.setSortingEnabled(__sortingEnabled)'''
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"NEW PAGE TEST", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
@@ -1576,4 +1604,5 @@ class Ui_MainWindow(object):
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi
+
 
