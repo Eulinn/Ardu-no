@@ -113,7 +113,7 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
-        start_new_thread(self.server,(widgets,""))
+        
 
 
     # BUTTONS CLICK
@@ -153,19 +153,6 @@ class MainWindow(QMainWindow):
     
 
     
-    def server(self,widgets,a):
-        contador = 1
-        while True:
-            try:
-                self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                self.serverP.connect((socket.gethostname(),2306))
-                self.serverP.send("CL".encode())
-                widgets.titleRightInfo.setText(self.mensagens[3])
-                break
-    
-            except:
-                widgets.titleRightInfo.setText(self.mensagens[4]+f' Tentativa - {contador}')
-                contador+=1
 
 
 
