@@ -94,10 +94,10 @@ class MainWindow(QMainWindow):
         widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
         widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
 
-        # EXTRA RIGHT BOX
-        def openCloseRightBox():
+        # Aqui abre uma aba no canto direito  ein, pode ser usado posteriormente viu viu viu
+        '''def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
-        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)'''
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -157,6 +157,8 @@ class MainWindow(QMainWindow):
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             else:
                 widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Login Inacessível", None))
+                btn.setStyleSheet('color:red;background-image: url(:/icons/images/icons/cil-user.png)')
+                UIFunctions.toggleMenu(self, True)
 
         if btnName == "Logenviar" and self.usuario == None:
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):

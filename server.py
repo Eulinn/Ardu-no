@@ -58,7 +58,10 @@ class Main():
                             cliente.send("6".encode())
 
                 except:
-                    cliente.send("7".encode())
+                    try:
+                        cliente.send("7".encode())
+                    except:
+                        self.clientes.remove(cliente)
 
 
             
