@@ -80,6 +80,9 @@ class MainWindow(QMainWindow):
         widgets.btn_new.clicked.connect(self.buttonClick)
         widgets.Login.clicked.connect(self.buttonClick)
 
+        widgets.botaoenviar.clicked.connect(self.buttonClick)
+
+
         # EXTRA LEFT BOX
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
@@ -143,9 +146,15 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
         
         if btnName == "login":
-            widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
-            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            if(widgets.titleRightInfo.text() != self.mensagens[4]):
+                widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
+                UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+                btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            else:
+                pass
+
+        if btnName == "Logenviar":
+            pass
 
 
 
@@ -177,7 +186,7 @@ class MainWindow(QMainWindow):
                 break
     
             except:
-                widgets.titleRightInfo.setText(self.mensagens[4]+f' Tentativa - {contador}')
+                widgets.titleRightInfo.setText(self.mensagens[4])
                 contador+=1
     
 
