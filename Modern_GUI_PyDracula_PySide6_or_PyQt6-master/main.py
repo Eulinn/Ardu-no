@@ -36,7 +36,12 @@ class MainWindow(QMainWindow):
         "Enviado",
         "Conectando ao server...",
         "Server conectado, vá para a aba de controles!",
-        "Servidor Não Conectado, tentando conectar novamente!"]
+        "Servidor Não Conectado, tentando conectar novamente!",
+        "Login Inválido!",
+        "Login validado",
+        "Erro no servidor"]
+
+        self.usuario = None
         
         QMainWindow.__init__(self)
 
@@ -116,7 +121,7 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
-        start_new_thread(self.server,(widgets,""))
+        start_new_thread(self.server,(widgets,None))
 
 
     # BUTTONS CLICK
@@ -146,15 +151,19 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
         
         if btnName == "login":
-            if(widgets.titleRightInfo.text() != self.mensagens[4]):
+            if (widgets.titleRightInfo.text() != self.mensagens[4] and widgets.titleRightInfo.text() != self.mensagens[2]):
                 widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             else:
-                pass
+                widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Login Inacessível", None))
 
-        if btnName == "Logenviar":
-            pass
+        if btnName == "Logenviar" and self.usuario == None:
+            if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
+                start_new_thread(self.validarLogin,(widgets,None))
+                
+
+
 
 
 
@@ -174,7 +183,28 @@ class MainWindow(QMainWindow):
         self.dragPos = event.globalPos()
 
 
-    
+    def validarLogin(self,widgets,a):
+        us = widgets.usuario.text()
+        sh = widgets.senha.text()
+
+        self.serverP.send(f'lg-{us};{sh}'.encode())
+        while True:
+            
+            msg = self.serverP.recv(32).decode("utf-8")
+            if msg:
+                if int(msg) == 5:
+                    widgets.titleRightInfo.setText(self.mensagens[5] + " Tente novamente.")
+                    break
+                elif int(msg) == 6:
+                    widgets.titleRightInfo.setText(self.mensagens[6]+f" Bem Vindo(a), {us}")
+                    widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
+                    self.usuario = us
+                    break
+                elif int(msg) == 7:
+                    widgets.titleRightInfo.setText(self.mensagens[7])
+                    break
+
+
     def server(self,widgets,a):
         contador = 1
         while True:

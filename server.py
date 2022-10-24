@@ -48,18 +48,17 @@ class Main():
 
     def controleCLiente(self,cliente,a):
         while True:
-            msg = cliente.recv(32)
+            msg = cliente.recv(32).decode("utf-8")
             if msg:
                 try:
-                    self.arduino["AD"].send(msg) #Envia mandamento pro arduino
-                    while True:
-                        msg_volta = self.arduino["AD"].recv(32)#espera uma mensagem  do arduino sendo boa ou ruim
-                        if msg_volta:
-                            cliente.send(msg_volta)
-                            break
+                    ver = msg.split('-')
+                    if ver[0] == "lg":
+                        Verificar = ver[1].split(";")
+                        if(Verificar[0] == "eulin" and Verificar[1] == "1234"):
+                            cliente.send("6".encode())
+
                 except:
-                    cliente.send("0".encode())
-                    print("mandou pro cliente")
+                    cliente.send("7".encode())
 
 
             
