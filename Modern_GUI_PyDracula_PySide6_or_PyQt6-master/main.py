@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
 
         # QTableWidget PARAMETERS
         # ///////////////////////////////////////////////////////////////
-        '''widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)'''
+        widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
