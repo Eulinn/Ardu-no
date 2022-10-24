@@ -1408,60 +1408,62 @@ class Ui_MainWindow(object):
 
 #FIM DO CÓDIGO AQUI
 
-        self.login_page = QWidget()
-        self.login_page.setObjectName(u"login_page")
-        self.verticalLayout_20 = QHBoxLayout(self.login_page)
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        def LOGINCODIGO():
+                self.login_page = QWidget()
+                self.login_page.setObjectName(u"login_page")
+                self.verticalLayout_20 = QHBoxLayout(self.login_page)
+                self.verticalLayout_20.setObjectName(u"verticalLayout_20")
 
 
-        
-        
-        self.widget_login = QWidget()
-        self.widget_login.setObjectName("login_widget")
-        self.widget_login.setMaximumWidth(300)
-        self.widget_login.setMaximumHeight(200)
+                
+                
+                self.widget_login = QWidget()
+                self.widget_login.setObjectName("login_widget")
+                self.widget_login.setMaximumWidth(300)
+                self.widget_login.setMaximumHeight(200)
 
-        self.layoutLogin = QVBoxLayout(self.widget_login)
+                self.layoutLogin = QVBoxLayout(self.widget_login)
 
-        self.tituloLogin = QLabel()
-        self.tituloLogin.setAlignment(Qt.AlignCenter)
-        self.tituloLogin.setStyleSheet("font-size:19px;")
+                self.tituloLogin = QLabel()
+                self.tituloLogin.setAlignment(Qt.AlignCenter)
+                self.tituloLogin.setStyleSheet("font-size:19px;")
 
-        self.usuario = QLineEdit()
-        self.usuario.setMinimumHeight(50)
-        self.usuario.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+                self.usuario = QLineEdit()
+                self.usuario.setMinimumHeight(50)
+                self.usuario.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
 
-        self.senha = QLineEdit()
-        self.senha.setMinimumHeight(50)
-        self.senha.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+                self.senha = QLineEdit()
+                self.senha.setMinimumHeight(50)
+                self.senha.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
 
-        self.botaoenviar = QPushButton()
-        self.botaoenviar.setObjectName(u"Logenviar")
-        self.botaoenviar.setMinimumHeight(50)
-        self.botaoenviar.setFont(font)
-        self.botaoenviar.setCursor(QCursor(Qt.PointingHandCursor))
-        self.botaoenviar.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/images/icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.botaoenviar.setIcon(icon4)
-
-
+                self.botaoenviar = QPushButton()
+                self.botaoenviar.setObjectName(u"Logenviar")
+                self.botaoenviar.setMinimumHeight(50)
+                self.botaoenviar.setFont(font)
+                self.botaoenviar.setCursor(QCursor(Qt.PointingHandCursor))
+                self.botaoenviar.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
+                icon4 = QIcon()
+                icon4.addFile(u":/icons/images/icons/cil-cursor.png", QSize(), QIcon.Normal, QIcon.Off)
+                self.botaoenviar.setIcon(icon4)
 
 
 
-        self.layoutLogin.addWidget(self.tituloLogin)#dentro do amarelo
-        self.layoutLogin.addWidget(self.usuario)
-        self.layoutLogin.addWidget(self.senha)
-        self.layoutLogin.addWidget(self.botaoenviar)
 
-        
 
-        self.verticalLayout_20.addWidget(self.widget_login)#layout da página toda
-        
-        self.stackedWidget.addWidget(self.login_page)#mais um widget inteiro
+                self.layoutLogin.addWidget(self.tituloLogin)#dentro do amarelo
+                self.layoutLogin.addWidget(self.usuario)
+                self.layoutLogin.addWidget(self.senha)
+                self.layoutLogin.addWidget(self.botaoenviar)
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
+                
 
+                self.verticalLayout_20.addWidget(self.widget_login)#layout da página toda
+                
+                self.stackedWidget.addWidget(self.login_page)#mais um widget inteiro
+
+                self.verticalLayout_15.addWidget(self.stackedWidget)
+
+        LOGINCODIGO()
 
 
 
