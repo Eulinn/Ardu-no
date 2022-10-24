@@ -13,11 +13,12 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-from _thread import *
+
 import sys
 import os
 import platform
 import socket
+from _thread import start_new_thread
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -36,9 +37,7 @@ class MainWindow(QMainWindow):
         "Conectando ao server...",
         "Server conectado, vá para a aba de controles!",
         "Servidor Não Conectado, tentando conectar novamente!"]
-
-
-
+        
         QMainWindow.__init__(self)
 
         # SET AS GLOBAL WIDGETS
@@ -54,7 +53,7 @@ class MainWindow(QMainWindow):
 
         # APP NAME
         # ///////////////////////////////////////////////////////////////
-        title = "Controle De Arduino"
+        title = "Dispositivos"
         description = self.mensagens[2]
         # APPLY TEXTS
         self.setWindowTitle(title)
@@ -77,8 +76,12 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_controles.clicked.connect(self.buttonClick)
-    
+        widgets.btn_widgets.clicked.connect(self.buttonClick)
+        widgets.btn_new.clicked.connect(self.buttonClick)
+        widgets.Login.clicked.connect(self.buttonClick)
+
+        widgets.botaoenviar.clicked.connect(self.buttonClick)
+
 
         # EXTRA LEFT BOX
         def openCloseLeftBox():
@@ -89,7 +92,7 @@ class MainWindow(QMainWindow):
         # EXTRA RIGHT BOX
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
-        
+        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -131,12 +134,32 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW WIDGETS PAGE
-        if btnName == "btn_controles":
+        if btnName == "btn_widgets":
             widgets.stackedWidget.setCurrentWidget(widgets.widgets)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
+        # SHOW NEW PAGE
+        if btnName == "btn_new":
+            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
         
+        if btnName == "login":
+            if(widgets.titleRightInfo.text() != self.mensagens[4]):
+                widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
+                UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+                btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            else:
+                pass
+
+        if btnName == "Logenviar":
+            pass
+
+
+
+
+
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -149,7 +172,7 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         # SET DRAG POS WINDOW
         self.dragPos = event.globalPos()
-    
+
 
     
     def server(self,widgets,a):
@@ -163,10 +186,9 @@ class MainWindow(QMainWindow):
                 break
     
             except:
-                widgets.titleRightInfo.setText(self.mensagens[4]+f' Tentativa - {contador}')
+                widgets.titleRightInfo.setText(self.mensagens[4])
                 contador+=1
-
-
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
