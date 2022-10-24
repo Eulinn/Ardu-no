@@ -689,6 +689,22 @@ class Ui_MainWindow(object):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #CÓDIGO PARA ADICIONAR NOVOS BOTÕES
 
 
@@ -705,6 +721,22 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.Login)
 
 #CÓDIGO TERMINA AQUI    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1361,13 +1393,13 @@ class Ui_MainWindow(object):
 
         self.new_page = QWidget()
         self.new_page.setObjectName(u"new_page")
-        self.verticalLayout_20 = QVBoxLayout(self.new_page)
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.verticalLayout_nn = QVBoxLayout(self.new_page)
+        self.verticalLayout_nn.setObjectName(u"verticalLayout_nn")
         self.label = QLabel(self.new_page)
         self.label.setObjectName(u"label")
         self.label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_20.addWidget(self.label)
+        self.verticalLayout_nn.addWidget(self.label)
 
         self.stackedWidget.addWidget(self.new_page)
 
@@ -1378,15 +1410,55 @@ class Ui_MainWindow(object):
 
         self.login_page = QWidget()
         self.login_page.setObjectName(u"login_page")
-        self.verticalLayout_20 = QVBoxLayout(self.login_page)
+        self.verticalLayout_20 = QHBoxLayout(self.login_page)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.labelLogin = QLabel(self.login_page)
-        self.labelLogin.setObjectName(u"labelLogin")
-        self.labelLogin.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_20.addWidget(self.labelLogin)
 
-        self.stackedWidget.addWidget(self.login_page)
+        
+        
+        self.widget_login = QWidget()
+        self.widget_login.setObjectName("login_widget")
+        self.widget_login.setMaximumWidth(300)
+        self.widget_login.setMaximumHeight(200)
+
+        self.layoutLogin = QVBoxLayout(self.widget_login)
+
+        self.tituloLogin = QLabel()
+        self.tituloLogin.setAlignment(Qt.AlignCenter)
+        self.tituloLogin.setStyleSheet("font-size:19px;")
+
+        self.usuario = QLineEdit()
+        self.usuario.setMinimumHeight(50)
+        self.usuario.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.senha = QLineEdit()
+        self.senha.setMinimumHeight(50)
+        self.senha.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.botaoenviar = QPushButton()
+        self.botaoenviar.setObjectName(u"Logenviar")
+        self.botaoenviar.setMinimumHeight(50)
+        self.botaoenviar.setFont(font)
+        self.botaoenviar.setCursor(QCursor(Qt.PointingHandCursor))
+        self.botaoenviar.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.botaoenviar.setIcon(icon4)
+
+
+
+
+
+        self.layoutLogin.addWidget(self.tituloLogin)#dentro do amarelo
+        self.layoutLogin.addWidget(self.usuario)
+        self.layoutLogin.addWidget(self.senha)
+        self.layoutLogin.addWidget(self.botaoenviar)
+
+        
+
+        self.verticalLayout_20.addWidget(self.widget_login)#layout da página toda
+        
+        self.stackedWidget.addWidget(self.login_page)#mais um widget inteiro
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
 
@@ -1639,8 +1711,12 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"NEW PAGE TEST", None))
-        self.labelLogin.setText(QCoreApplication.translate("MainWindow", u"Página de login", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
+        self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
+
+        self.usuario.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
+        self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
+        self.botaoenviar.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
     # retranslateUi
 
