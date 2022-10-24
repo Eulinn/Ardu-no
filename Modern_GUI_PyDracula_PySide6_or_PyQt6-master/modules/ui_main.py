@@ -136,7 +136,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "/* Title Menu */\n"
-"#titleRightInfo { padding-left: 10px; font-size:19px; color:rgb(250, 147, 249);}\n"
+"#titleRightInfo { padding-left: 10px; }\n"
 "\n"
 "\n"
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
@@ -663,17 +663,49 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_home)
 
-        self.btn_controles = QPushButton(self.topMenu)
-        self.btn_controles.setObjectName(u"btn_controles")
-        sizePolicy.setHeightForWidth(self.btn_controles.sizePolicy().hasHeightForWidth())
-        self.btn_controles.setSizePolicy(sizePolicy)
-        self.btn_controles.setMinimumSize(QSize(0, 45))
-        self.btn_controles.setFont(font)
-        self.btn_controles.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_controles.setLayoutDirection(Qt.LeftToRight)
-        self.btn_controles.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-gamepad.png);")
+        self.btn_widgets = QPushButton(self.topMenu)
+        self.btn_widgets.setObjectName(u"btn_widgets")
+        sizePolicy.setHeightForWidth(self.btn_widgets.sizePolicy().hasHeightForWidth())
+        self.btn_widgets.setSizePolicy(sizePolicy)
+        self.btn_widgets.setMinimumSize(QSize(0, 45))
+        self.btn_widgets.setFont(font)
+        self.btn_widgets.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_widgets.setLayoutDirection(Qt.LeftToRight)
+        self.btn_widgets.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-gamepad.png);")
 
-        self.verticalLayout_8.addWidget(self.btn_controles)
+        self.verticalLayout_8.addWidget(self.btn_widgets)
+
+        self.btn_new = QPushButton(self.topMenu)
+        self.btn_new.setObjectName(u"btn_new")
+        sizePolicy.setHeightForWidth(self.btn_new.sizePolicy().hasHeightForWidth())
+        self.btn_new.setSizePolicy(sizePolicy)
+        self.btn_new.setMinimumSize(QSize(0, 45))
+        self.btn_new.setFont(font)
+        self.btn_new.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_new.setLayoutDirection(Qt.LeftToRight)
+        self.btn_new.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
+
+        self.verticalLayout_8.addWidget(self.btn_new)
+
+
+
+#CÓDIGO PARA ADICIONAR NOVOS BOTÕES
+
+
+        self.Login = QPushButton(self.topMenu)
+        self.Login.setObjectName(u"login")
+        sizePolicy.setHeightForWidth(self.Login.sizePolicy().hasHeightForWidth())
+        self.Login.setSizePolicy(sizePolicy)
+        self.Login.setMinimumSize(QSize(0, 45))
+        self.Login.setFont(font)
+        self.Login.setCursor(QCursor(Qt.PointingHandCursor))
+        self.Login.setLayoutDirection(Qt.LeftToRight)
+        self.Login.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
+
+        self.verticalLayout_8.addWidget(self.Login)
+
+#CÓDIGO TERMINA AQUI    
+
 
 
         self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
@@ -781,7 +813,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.setSpacing(0)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
-
+        
 
 
         self.verticalLayout_12.addWidget(self.extraTopMenu, 0, Qt.AlignTop)
@@ -873,7 +905,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setSpacing(5)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        
+        self.settingsTopBtn = QPushButton(self.rightButtons)
+        self.settingsTopBtn.setObjectName(u"settingsTopBtn")
+        self.settingsTopBtn.setMinimumSize(QSize(28, 28))
+        self.settingsTopBtn.setMaximumSize(QSize(28, 28))
+        self.settingsTopBtn.setCursor(QCursor(Qt.PointingHandCursor))
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.settingsTopBtn.setIcon(icon1)
+        self.settingsTopBtn.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_2.addWidget(self.settingsTopBtn)
 
         self.minimizeAppBtn = QPushButton(self.rightButtons)
         self.minimizeAppBtn.setObjectName(u"minimizeAppBtn")
@@ -956,29 +998,6 @@ class Ui_MainWindow(object):
 "background-position: center;\n"
 "background-repeat: no-repeat;")
         self.stackedWidget.addWidget(self.home)
-
-
-
-
-
-
-
-
-
-
-
-#AQUI TEMOS A TELA DE CONTROLE -----------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
         self.widgets.setStyleSheet(u"b")
@@ -1011,23 +1030,15 @@ class Ui_MainWindow(object):
         self.frame_title_wid_1.setFrameShadow(QFrame.Raised)
         self.verticalLayout_18 = QVBoxLayout(self.frame_title_wid_1)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
-
-
-        
-
-
         self.labelBoxBlenderInstalation = QLabel(self.frame_title_wid_1)
         self.labelBoxBlenderInstalation.setObjectName(u"labelBoxBlenderInstalation")
         self.labelBoxBlenderInstalation.setFont(font)
-        self.labelBoxBlenderInstalation.setStyleSheet(u"font-size:17px;")
+        self.labelBoxBlenderInstalation.setStyleSheet(u"")
 
         self.verticalLayout_18.addWidget(self.labelBoxBlenderInstalation)
 
 
         self.verticalLayout_17.addWidget(self.frame_title_wid_1)
-
-#COMEÇA AQUI ------------------------
-
 
         self.frame_content_wid_1 = QFrame(self.frame_div_content_1)
         self.frame_content_wid_1.setObjectName(u"frame_content_wid_1")
@@ -1041,7 +1052,7 @@ class Ui_MainWindow(object):
         self.lineEdit = QLineEdit(self.frame_content_wid_1)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setMinimumSize(QSize(0, 30))
-        self.lineEdit.setStyleSheet(u"background-color: rgb(33, 37, 43);")#guardar--------------
+        self.lineEdit.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
 
@@ -1059,7 +1070,7 @@ class Ui_MainWindow(object):
 
         self.labelVersion_3 = QLabel(self.frame_content_wid_1)
         self.labelVersion_3.setObjectName(u"labelVersion_3")
-        self.labelVersion_3.setStyleSheet(u"color: rgb(113, 126, 149)")
+        self.labelVersion_3.setStyleSheet(u"color: rgb(113, 126, 149);")
         self.labelVersion_3.setLineWidth(1)
         self.labelVersion_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
@@ -1195,8 +1206,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.row_2)
 
-
-        
         self.row_3 = QFrame(self.widgets)
         self.row_3.setObjectName(u"row_3")
         self.row_3.setMinimumSize(QSize(0, 150))
@@ -1331,6 +1340,25 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.row_3)
 
         self.stackedWidget.addWidget(self.widgets)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#CÓDIGO PARA NOVO WIDGET PARA POR LÁ
+
+
         self.new_page = QWidget()
         self.new_page.setObjectName(u"new_page")
         self.verticalLayout_20 = QVBoxLayout(self.new_page)
@@ -1344,6 +1372,52 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.new_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
+
+
+#FIM DO CÓDIGO AQUI
+
+        self.login_page = QWidget()
+        self.login_page.setObjectName(u"login_page")
+        self.verticalLayout_20 = QVBoxLayout(self.login_page)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.labelLogin = QLabel(self.login_page)
+        self.labelLogin.setObjectName(u"labelLogin")
+        self.labelLogin.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_20.addWidget(self.labelLogin)
+
+        self.stackedWidget.addWidget(self.login_page)
+
+        self.verticalLayout_15.addWidget(self.stackedWidget)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         self.horizontalLayout_4.addWidget(self.pagesContainer)
@@ -1378,45 +1452,7 @@ class Ui_MainWindow(object):
         self.topMenus.setObjectName(u"topMenus")
         self.topMenus.setFrameShape(QFrame.NoFrame)
         self.topMenus.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_14 = QVBoxLayout(self.topMenus)
-        self.verticalLayout_14.setSpacing(0)
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.btn_message = QPushButton(self.topMenus)
-        self.btn_message.setObjectName(u"btn_message")
-        sizePolicy.setHeightForWidth(self.btn_message.sizePolicy().hasHeightForWidth())
-        self.btn_message.setSizePolicy(sizePolicy)
-        self.btn_message.setMinimumSize(QSize(0, 45))
-        self.btn_message.setFont(font)
-        self.btn_message.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_message.setLayoutDirection(Qt.LeftToRight)
-        self.btn_message.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-envelope-open.png);")
-
-        self.verticalLayout_14.addWidget(self.btn_message)
-
-        self.btn_print = QPushButton(self.topMenus)
-        self.btn_print.setObjectName(u"btn_print")
-        sizePolicy.setHeightForWidth(self.btn_print.sizePolicy().hasHeightForWidth())
-        self.btn_print.setSizePolicy(sizePolicy)
-        self.btn_print.setMinimumSize(QSize(0, 45))
-        self.btn_print.setFont(font)
-        self.btn_print.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_print.setLayoutDirection(Qt.LeftToRight)
-        self.btn_print.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-print.png);")
-
-        self.verticalLayout_14.addWidget(self.btn_print)
-
-        self.btn_logout = QPushButton(self.topMenus)
-        self.btn_logout.setObjectName(u"btn_logout")
-        sizePolicy.setHeightForWidth(self.btn_logout.sizePolicy().hasHeightForWidth())
-        self.btn_logout.setSizePolicy(sizePolicy)
-        self.btn_logout.setMinimumSize(QSize(0, 45))
-        self.btn_logout.setFont(font)
-        self.btn_logout.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_logout.setLayoutDirection(Qt.LeftToRight)
-        self.btn_logout.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-account-logout.png);")
-
-        self.verticalLayout_14.addWidget(self.btn_logout)
+        
 
 
         self.verticalLayout_13.addWidget(self.topMenus, 0, Qt.AlignTop)
@@ -1492,16 +1528,19 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"PyDracula", None))
-        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"GUI Moderna em Python", None))
-        self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Esconder", None))
+        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Modern GUI / Flat Style", None))
+        self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
-        self.btn_controles.setText(QCoreApplication.translate("MainWindow", u"Controles", None))
+        self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
+        self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
+        self.Login.setText(QCoreApplication.translate("MainWindow", u"Login", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
         self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
 #if QT_CONFIG(tooltip)
-        self.extraCloseColumnBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close Créditos", None))
+        self.extraCloseColumnBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close left box", None))
 #endif // QT_CONFIG(tooltip)
         self.extraCloseColumnBtn.setText("")
+        
         self.textEdit.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -1516,9 +1555,11 @@ class Ui_MainWindow(object):
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#ff79c6;\">Convert QRC</span></p>\n"
 "<p align=\"center\" "
                         "style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#ffffff;\">pyside6-rcc resources.qrc -o resources_rc.py</span></p></body></html>", None))
-        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Arduino em python - Euler", None))
+        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"PyDracula APP - Theme with colors based on Dracula for Python.", None))
 #if QT_CONFIG(tooltip)
-        
+        self.settingsTopBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Settings", None))
+#endif // QT_CONFIG(tooltip)
+        self.settingsTopBtn.setText("")
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
@@ -1531,7 +1572,7 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
-        self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"Aparelhos Conectados".upper(), None))
+        self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Open", None))
@@ -1598,11 +1639,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"NEW PAGE TEST", None))
-        self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
-        self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
-        self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
+        self.labelLogin.setText(QCoreApplication.translate("MainWindow", u"Página de login", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi
-
 
