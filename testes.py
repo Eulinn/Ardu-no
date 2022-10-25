@@ -1,5 +1,6 @@
-teste = 'aaa'
+import time
 
-print(teste.replace('euler',""),"doioisdojaknf")
+
+print(time.strftime(r'%d/%m/%Y - %H:%M',time.localtime()))
 
 

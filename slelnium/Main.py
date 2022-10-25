@@ -13,13 +13,15 @@ class Main():
             valor =  self.pesquisarDolar()
             appleValor = self.ProdutoApple()
             appleValorBR = self.ProdutoAppleBrasil()
-            print(f"Dolar: {valor} - AppleEUA: {appleValor} - AppleBR: {appleValorBR}")
+
+            Comparacao = valor* appleValor
+            dia = time.strftime(r'%d/%m/%Y - %H:%M',time.localtime())
+            texto = f"{dia} :: AppleBR - R${str(appleValorBR).replace('.',',')}      AppleEUA - U${appleValor} com Dolar à R${str(round(valor,2)).replace('.',',')} - R${str(round(Comparacao,2)).replace('.',',')} // Economia - R$ {str(round((appleValorBR-Comparacao),2)).replace('.',',')}"
+            with open("./Relatorio.txt",'w+') as arq:
+                arq.writelines(texto)
+            
 
 
-            
-            
-  
-            input()
         else:
             print("Driver Do Chrome Não Encontrado")
     
@@ -35,7 +37,9 @@ class Main():
     def pesquisarDolar(self):
         self.Chrome.find_element(By.XPATH,'/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input').send_keys('Dolar hoje')
         self.Chrome.find_element(By.XPATH,'/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]').click()
-        return self.Chrome.find_element(By.XPATH,'//*[@id="knowledge-currency__updatable-data-column"]/div[1]/div[2]/span[1]').text
+        valor = self.Chrome.find_element(By.XPATH,'//*[@id="knowledge-currency__updatable-data-column"]/div[1]/div[2]/span[1]').text
+        return float(valor.replace(",","."))
+
 
     def ProdutoApple(self):
         self.Chrome.get('https://www.apple.com/shop/buy-iphone/iphone-14-pro')
@@ -59,7 +63,6 @@ class Main():
             if j.replace('.',"").isdigit():
                 ValorReal = int(j.replace('.',""))
         
-        print(ValorReal)
         return ValorReal
         
 
