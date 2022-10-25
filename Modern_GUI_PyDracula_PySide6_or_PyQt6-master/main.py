@@ -156,6 +156,7 @@ class MainWindow(QMainWindow):
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
                 btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
+                widgets.Login.setText(QCoreApplication.translate("MainWindow", u"CLique para Logar", None))
             else:
                 widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Login Inacessível", None))
                 btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
