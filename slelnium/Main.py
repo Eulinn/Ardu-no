@@ -13,7 +13,7 @@ class Main():
             valor =  self.pesquisarDolar()
             appleValor = self.ProdutoApple()
             appleValorBR = self.ProdutoAppleBrasil()
-            print()
+            print(f"Dolar: {valor} - AppleEUA: {appleValor} - AppleBR: {appleValorBR}")
 
 
             
@@ -39,11 +39,11 @@ class Main():
 
     def ProdutoApple(self):
         self.Chrome.get('https://www.apple.com/shop/buy-iphone/iphone-14-pro')
-        #time.sleep(5)
+        time.sleep(3)
         valor = self.Chrome.find_element(By.XPATH,'//*[@id="root"]/div[3]/div[1]/div[1]/div[2]/div/div/div[1]/div').text
         ValorReal = ''
         for j in valor.split():
-            if '$' in list(j) or j.isdigit():
+            if '$' in list(j):
                 if j.replace('$','').isdigit():
                     ValorReal = int(j.replace('$',''))
         
@@ -53,12 +53,13 @@ class Main():
     def ProdutoAppleBrasil(self):
         self.Chrome.get('https://www.apple.com/br/shop/buy-iphone/iphone-14-pro')
         valor = self.Chrome.find_element(By.XPATH,'//*[@id="root"]/div[3]/div[1]/div[1]/div[2]/div/div/div[1]/div').text
+        time.sleep(3)
         ValorReal = ''
         for j in valor.split():
-            if '$' in list(j) or j.isdigit():
-                if j.replace('$','').isdigit():
-                    ValorReal = int(j.replace('$',''))
+            if j.replace('.',"").isdigit():
+                ValorReal = int(j.replace('.',""))
         
+        print(ValorReal)
         return ValorReal
         
 
