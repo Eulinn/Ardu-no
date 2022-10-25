@@ -164,6 +164,7 @@ class MainWindow(QMainWindow):
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
                 start_new_thread(self.validarLogin,(widgets,None))
                 
+                
 
 
 

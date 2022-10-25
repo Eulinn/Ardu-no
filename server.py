@@ -56,6 +56,8 @@ class Main():
                         Verificar = ver[1].split(";")
                         if(Verificar[0] == "eulin" and Verificar[1] == "1234"):
                             cliente.send("6".encode())
+                        else:
+                            cliente.send('5'.encode())
 
                 except:
                     try:
