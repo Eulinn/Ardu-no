@@ -16,7 +16,7 @@ class Main():
 
             Comparacao = valor* appleValor
             dia = time.strftime(r'%d/%m/%Y - %H:%M',time.localtime())
-            texto = f"{dia} :: AppleBR - R${str(appleValorBR).replace('.',',')}      AppleEUA - U${appleValor} com Dolar à R${str(round(valor,2)).replace('.',',')} - R${str(round(Comparacao,2)).replace('.',',')} // Economia - R$ {str(round((appleValorBR-Comparacao),2)).replace('.',',')}"
+            texto = f"{dia} :: AppleBR - R${str(appleValorBR).replace('.',',')}    AppleEUA - U${appleValor} com Dolar à R${str(round(valor,2)).replace('.',',')} - R${str(round(Comparacao,2)).replace('.',',')} // Economia - R$ {str(round((appleValorBR-Comparacao),2)).replace('.',',')}"
             with open("./Relatorio.txt",'r') as arq:
                 listatexto = arq.readlines()
             with open("./Relatorio.txt",'w+') as arq:
