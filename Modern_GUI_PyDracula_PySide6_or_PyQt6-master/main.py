@@ -155,9 +155,10 @@ class MainWindow(QMainWindow):
                 widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+                btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
             else:
                 widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Login Inacessível", None))
-                btn.setStyleSheet('color:red;background-image: url(:/icons/images/icons/cil-user.png)')
+                btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
                 UIFunctions.toggleMenu(self, True)
 
         if btnName == "Logenviar" and self.usuario == None:
