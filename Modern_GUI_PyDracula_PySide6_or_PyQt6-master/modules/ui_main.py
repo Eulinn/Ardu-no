@@ -516,7 +516,7 @@ class Ui_MainWindow(object):
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
 "CommandLinkButton */\n"
 "QCommandLi"
-                        "nkButton {	\n"
+                        "nkButton {	\n"#-----------------------
 "	color: rgb(255, 121, 198);\n"
 "	border-radius: 5px;\n"
 "	padding: 5px;\n"
@@ -675,17 +675,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_widgets)
 
-        self.btn_new = QPushButton(self.topMenu)
-        self.btn_new.setObjectName(u"btn_new")
-        sizePolicy.setHeightForWidth(self.btn_new.sizePolicy().hasHeightForWidth())
-        self.btn_new.setSizePolicy(sizePolicy)
-        self.btn_new.setMinimumSize(QSize(0, 45))
-        self.btn_new.setFont(font)
-        self.btn_new.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_new.setLayoutDirection(Qt.LeftToRight)
-        self.btn_new.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
+        self.btn_dispositivos = QPushButton(self.topMenu)
+        self.btn_dispositivos.setObjectName(u"btn_dispositivos")
+        sizePolicy.setHeightForWidth(self.btn_dispositivos.sizePolicy().hasHeightForWidth())
+        self.btn_dispositivos.setSizePolicy(sizePolicy)
+        self.btn_dispositivos.setMinimumSize(QSize(0, 45))
+        self.btn_dispositivos.setFont(font)
+        self.btn_dispositivos.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_dispositivos.setLayoutDirection(Qt.LeftToRight)
+        self.btn_dispositivos.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
 
-        self.verticalLayout_8.addWidget(self.btn_new)
+        self.verticalLayout_8.addWidget(self.btn_dispositivos)
 
 
 
@@ -1398,7 +1398,55 @@ class Ui_MainWindow(object):
 
 #FIM DO CÓDIGO AQUI
 
+        self.Dispositivos = QWidget()
+        self.Dispositivos.setObjectName(u"dispositivos")
+        self.layoutdispo = QVBoxLayout(self.Dispositivos)
+        self.layoutdispo.setObjectName("Layoutdispositivos")
         
+        self.widgetdispositivo1 = QWidget()
+        self.widgetdispositivo1.setStyleSheet('''
+        background-color:rgb(33, 37, 43);
+        border-radius:5px;
+        border: 3px solid rgb(58, 66, 81);
+        ''')
+        self.widgetdispositivo1.setMaximumHeight(100)
+
+
+
+
+
+
+        self.widgetdispositivo2 = QWidget()
+        self.widgetdispositivo2.setStyleSheet('''
+        background-color:rgb(33, 37, 43);
+        border-radius:5px;
+        border: 3px solid rgb(58, 66, 81);
+        ''')
+        self.widgetdispositivo2.setMaximumHeight(100)
+        
+
+
+
+
+        self.layoutdispo.addWidget(self.widgetdispositivo1)
+        self.layoutdispo.addWidget(self.widgetdispositivo2)
+        self.stackedWidget.addWidget(self.Dispositivos)
+        self.verticalLayout_15.addWidget(self.stackedWidget)
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         self.login_page = QWidget()
         self.login_page.setObjectName(u"login_page")
         self.verticalLayout_20 = QHBoxLayout(self.login_page)
@@ -1436,6 +1484,17 @@ class Ui_MainWindow(object):
         icon4.addFile(u":/icons/images/icons/cil-cursor.png", QSize(), QIcon.Normal, QIcon.Off)
         self.botaoenviar.setIcon(icon4)
 
+        self.botaocadastro = QPushButton()
+        self.botaocadastro.setObjectName(u"Logenviar")
+        self.botaocadastro.setMinimumHeight(50)
+        self.botaocadastro.setFont(font)
+        self.botaocadastro.setCursor(QCursor(Qt.PointingHandCursor))
+        self.botaocadastro.setStyleSheet(u'''
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:13;
+        ''')
+
 
 
 
@@ -1444,6 +1503,7 @@ class Ui_MainWindow(object):
         self.layoutLogin.addWidget(self.usuario)
         self.layoutLogin.addWidget(self.senha)
         self.layoutLogin.addWidget(self.botaoenviar)
+        self.layoutLogin.addWidget(self.botaocadastro)
 
         
 
@@ -1596,7 +1656,7 @@ class Ui_MainWindow(object):
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
-        self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
+        self.btn_dispositivos.setText(QCoreApplication.translate("MainWindow", u"Dispositivos", None))
         self.Login.setText(QCoreApplication.translate("MainWindow", u"Login", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
         self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
@@ -1707,5 +1767,6 @@ class Ui_MainWindow(object):
         self.usuario.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
         self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
         self.botaoenviar.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
+        self.botaocadastro.setText(QCoreApplication.translate("MainWindow", u"Cadastrar", None))
     # retranslateUi
 
