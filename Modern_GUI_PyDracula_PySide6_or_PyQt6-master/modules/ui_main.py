@@ -8,6 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+from cProfile import label
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -1389,6 +1390,9 @@ class Ui_MainWindow(object):
         self.label.setObjectName(u"label")
         self.label.setAlignment(Qt.AlignCenter)
 
+
+
+
         self.verticalLayout_nn.addWidget(self.label)
 
         self.stackedWidget.addWidget(self.new_page)
@@ -1410,6 +1414,55 @@ class Ui_MainWindow(object):
         border: 3px solid rgb(58, 66, 81);
         ''')
         self.widgetdispositivo1.setMaximumHeight(100)
+
+        self.layoutdsp1 = QHBoxLayout(self.widgetdispositivo1)
+        self.layoutdsp1.setContentsMargins(0,0,0,0)
+
+        self.nomelb = QLabel()
+        self.nomelb.setMaximumWidth(150)
+        self.nomelb.setAlignment(Qt.AlignCenter)
+        self.nomelb.setStyleSheet("border:0; margin:0;background-color:transparent; font-size:19px;")
+        self.layoutdsp1.addWidget(self.nomelb)
+
+        self.nada1 = QLabel()
+        self.nada1.setAlignment(Qt.AlignCenter)
+        self.nada1.setStyleSheet("border:0; margin:0;background-color:transparent;")
+        self.layoutdsp1.addWidget(self.nada1)
+
+        self.nada2 = QLabel()
+        self.nada2.setAlignment(Qt.AlignCenter)
+        self.nada2.setStyleSheet("border:0; margin:0;background-color:transparent;")
+        self.layoutdsp1.addWidget(self.nada2)
+
+        self.nada3 = QPushButton()
+        self.nada3.setMaximumWidth(200)
+        self.nada3.setMinimumHeight(80)
+        self.nada3.setStyleSheet(u'''
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:10;
+        ''')
+
+        self.layoutdsp1.addWidget(self.nada3)
+        
+
+
+        
+
+        self.nada4 = QPushButton()
+        self.nada4.setMaximumWidth(200)
+        self.nada4.setMinimumHeight(80)
+
+        self.nada4.setStyleSheet(u'''
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:10;
+        ''')
+
+        self.layoutdsp1.addWidget(self.nada4)
+
+        
+
 
 
 
@@ -1768,5 +1821,8 @@ class Ui_MainWindow(object):
         self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
         self.botaoenviar.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
         self.botaocadastro.setText(QCoreApplication.translate("MainWindow", u"Cadastrar", None))
+        self.nomelb.setText(QCoreApplication.translate("MainWindow", u"Dispositivo 1", None))
+        self.nada3.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
+        self.nada4.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
     # retranslateUi
 
