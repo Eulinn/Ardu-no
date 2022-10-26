@@ -1405,13 +1405,25 @@ class Ui_MainWindow(object):
         self.Dispositivos = QWidget()
         self.Dispositivos.setObjectName(u"dispositivos")
         self.layoutdispo = QVBoxLayout(self.Dispositivos)
+        self.layoutdispo.setAlignment(Qt.AlignTop)
         self.layoutdispo.setObjectName("Layoutdispositivos")
         
         self.widgetdispositivo1 = QWidget()
         self.widgetdispositivo1.setStyleSheet('''
-        background-color:rgb(33, 37, 43);
+        QWidget{background-color:rgb(33, 37, 43);
         border-radius:5px;
-        border: 3px solid rgb(58, 66, 81);
+        border: 3px solid rgb(58, 66, 81);}
+
+        QPushButton{
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:10;}
+
+        QPushButton:hover {
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);}
+
+
         ''')
         self.widgetdispositivo1.setMaximumHeight(100)
 
@@ -1434,32 +1446,27 @@ class Ui_MainWindow(object):
         self.nada2.setStyleSheet("border:0; margin:0;background-color:transparent;")
         self.layoutdsp1.addWidget(self.nada2)
 
-        self.nada3 = QPushButton()
-        self.nada3.setMaximumWidth(200)
-        self.nada3.setMinimumHeight(80)
-        self.nada3.setStyleSheet(u'''
-        background-color: rgb(44, 49, 60);
-        color: rgb(255, 170, 255);
-        margin:10;
-        ''')
+        self.btn_lig_1 = QPushButton()
+        self.btn_lig_1.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_lig_1.setFont(font)
+        self.btn_lig_1.setMaximumWidth(200)
+        self.btn_lig_1.setMinimumHeight(80)
+        
 
-        self.layoutdsp1.addWidget(self.nada3)
+        self.layoutdsp1.addWidget(self.btn_lig_1)
         
 
 
         
 
-        self.nada4 = QPushButton()
-        self.nada4.setMaximumWidth(200)
-        self.nada4.setMinimumHeight(80)
+        self.btn_deslig_1 = QPushButton()
+        self.btn_deslig_1.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_deslig_1.setFont(font)
+        self.btn_deslig_1.setMaximumWidth(200)
+        self.btn_deslig_1.setMinimumHeight(80)
 
-        self.nada4.setStyleSheet(u'''
-        background-color: rgb(44, 49, 60);
-        color: rgb(255, 170, 255);
-        margin:10;
-        ''')
 
-        self.layoutdsp1.addWidget(self.nada4)
+        self.layoutdsp1.addWidget(self.btn_deslig_1)
 
         
 
@@ -1471,11 +1478,62 @@ class Ui_MainWindow(object):
 
         self.widgetdispositivo2 = QWidget()
         self.widgetdispositivo2.setStyleSheet('''
-        background-color:rgb(33, 37, 43);
+        QWidget{background-color:rgb(33, 37, 43);
         border-radius:5px;
-        border: 3px solid rgb(58, 66, 81);
+        border: 3px solid rgb(58, 66, 81);}
+
+        QPushButton{
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:10;}
+
+        QPushButton:hover {
+	background-color: rgb(57, 65, 80);
+	border: 2px solid rgb(61, 70, 86);}
+
+
         ''')
         self.widgetdispositivo2.setMaximumHeight(100)
+
+        self.layoutdsp2 = QHBoxLayout(self.widgetdispositivo2)
+        self.layoutdsp2.setContentsMargins(0,0,0,0)
+
+        self.nomelb2 = QLabel()
+        self.nomelb2.setMaximumWidth(150)
+        self.nomelb2.setAlignment(Qt.AlignCenter)
+        self.nomelb2.setStyleSheet("border:0; margin:0;background-color:transparent; font-size:19px;")
+        self.layoutdsp2.addWidget(self.nomelb2)
+
+        self.nada1 = QLabel()
+        self.nada1.setAlignment(Qt.AlignCenter)
+        self.nada1.setStyleSheet("border:0; margin:0;background-color:transparent;")
+        self.layoutdsp2.addWidget(self.nada1)
+
+        self.nada2 = QLabel()
+        self.nada2.setAlignment(Qt.AlignCenter)
+        self.nada2.setStyleSheet("border:0; margin:0;background-color:transparent;")
+        self.layoutdsp2.addWidget(self.nada2)
+
+        self.btn_lig_2 = QPushButton()
+        self.btn_lig_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_lig_2.setFont(font)
+        self.btn_lig_2.setMaximumWidth(200)
+        self.btn_lig_2.setMinimumHeight(80)
+
+        self.layoutdsp2.addWidget(self.btn_lig_2)
+        
+
+
+        
+
+        self.btn_deslig_2 = QPushButton()
+        self.btn_deslig_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_deslig_2.setFont(font)
+        self.btn_deslig_2.setMaximumWidth(200)
+        self.btn_deslig_2.setMinimumHeight(80)
+
+
+        self.layoutdsp2.addWidget(self.btn_deslig_2)
         
 
 
@@ -1822,7 +1880,10 @@ class Ui_MainWindow(object):
         self.botaoenviar.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
         self.botaocadastro.setText(QCoreApplication.translate("MainWindow", u"Cadastrar", None))
         self.nomelb.setText(QCoreApplication.translate("MainWindow", u"Dispositivo 1", None))
-        self.nada3.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
-        self.nada4.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
+        self.nomelb2.setText(QCoreApplication.translate("MainWindow", u"Dispositivo 2", None))
+        self.btn_lig_1.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
+        self.btn_deslig_1.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
+        self.btn_lig_2.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
+        self.btn_deslig_2.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
     # retranslateUi
 

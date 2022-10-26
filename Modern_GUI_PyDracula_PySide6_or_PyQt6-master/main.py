@@ -14,6 +14,7 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+from time import sleep
 import sys
 import os
 import platform
@@ -32,14 +33,21 @@ widgets = None
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        self.msgs = True
+        self.conected = False
         self.mensagens=['Arduino inexistente ou não conectado!!',
         "Enviado",
         "Conectando ao server...",
-        "Server conectado, vá para a aba de controles!",
+        "Server conectado, vá para a aba de LOGIN!",
         "Servidor Não Conectado, tentando conectar novamente!",
         "Login Inválido!",
         "Login validado",
-        "Erro no servidor"]
+        "Erro no servidor",
+        "Esperando resposta...",
+        "Dispositivo Ligado",
+        "Dispositivo Desligado",
+        "Login indisponível sem conexão!",
+        "Conecte-se para acessar dispositivos!"]
 
         self.usuario = None
         
@@ -145,22 +153,23 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW NEW PAGE
-        if btnName == "btn_dispositivos":
+        if btnName == "btn_dispositivos" and self.usuario != None:
             widgets.stackedWidget.setCurrentWidget(widgets.Dispositivos) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
-        
+        else:
+            start_new_thread(self.MSGTemp,(12,1.5,widgets))
+
+
+
+
         if btnName == "login":
-            if (widgets.titleRightInfo.text() != self.mensagens[4] and widgets.titleRightInfo.text() != self.mensagens[2]):
+            if(self.conected):
                 widgets.stackedWidget.setCurrentWidget(widgets.login_page) # SET PAGE
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
-                btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
-                widgets.Login.setText(QCoreApplication.translate("MainWindow", u"CLique para Logar", None))
             else:
-                widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Login Inacessível", None))
-                btn.setStyleSheet('background-image: url(:/icons/images/icons/cil-user.png)')
-                UIFunctions.toggleMenu(self, True)
+                start_new_thread(self.MSGTemp,(11,1.5,widgets))
 
         if btnName == "Logenviar" and self.usuario == None:
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
@@ -218,11 +227,20 @@ class MainWindow(QMainWindow):
                 self.serverP.connect((socket.gethostname(),2306))
                 self.serverP.send("CL".encode())
                 widgets.titleRightInfo.setText(self.mensagens[3])
+                self.conected = True
                 break
-    
+
             except:
-                widgets.titleRightInfo.setText(self.mensagens[4])
+                if self.msgs:
+                    widgets.titleRightInfo.setText(self.mensagens[4])
                 contador+=1
+    
+
+    def MSGTemp(self,msg,temp,widgets):
+        self.msgs = False
+        widgets.titleRightInfo.setText(self.mensagens[msg])
+        sleep(temp)
+        self.msgs = True
     
 
 if __name__ == "__main__":
