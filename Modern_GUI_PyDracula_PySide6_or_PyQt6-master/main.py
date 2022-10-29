@@ -72,20 +72,26 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
 
+
         # TOGGLE MENU
         # ///////////////////////////////////////////////////////////////
         widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+
+
 
         # SET UI DEFINITIONS
         # ///////////////////////////////////////////////////////////////
         UIFunctions.uiDefinitions(self)
 
+
         # QTableWidget PARAMETERS
         # ///////////////////////////////////////////////////////////////
         widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
+
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
@@ -158,7 +164,7 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
         else:
-            start_new_thread(self.MSGTemp,(12,1.5,widgets))
+            start_new_thread(self.MSGTemp,(12,2,widgets))
 
 
 
@@ -169,7 +175,7 @@ class MainWindow(QMainWindow):
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             else:
-                start_new_thread(self.MSGTemp,(11,1.5,widgets))
+                start_new_thread(self.MSGTemp,(11,2,widgets))
 
         if btnName == "Logenviar" and self.usuario == None:
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
