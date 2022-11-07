@@ -1,10 +1,9 @@
-
+import requests
 import socket
 from _thread import *
 
 class Main():
     def __init__(self) -> None:
-        self.arduino = {}
         self.clientes = []
 
     def mensagemClientes(self):
@@ -34,15 +33,29 @@ class Main():
             
             if len(mensagem_arduino) == 0:
                 client.close()
-
-            elif str(mensagem_arduino) == "AD":
-                self.arduino["AD"] = client
             
             elif str(mensagem_arduino) == "CL":
                 self.clientes.append(client)
                 start_new_thread(self.controleCLiente,(client,0))
             
+    
+    def EnviarComando(self,valor):
+        
 
+        try:
+            rq = requests.get(f'http://192.168.0.101/?relay{valor}')
+            if (rq.text == r'[{relay0:off}]'):
+                return 14
+            elif (rq.text == r'[{relay0:on}]'):
+                return 13
+            elif (rq.text == r'[{relay2:off}]'):
+                return 16
+            elif (rq.text == r'[{relay2:on}]'):
+                return 15
+            else:
+                return 17
+        except OSError as erro:
+            return 15
 
             
 
@@ -58,6 +71,8 @@ class Main():
                             cliente.send("6".encode())
                         else:
                             cliente.send('5'.encode())
+                    if ver[0] == 'pin':
+                        cliente.send(str(self.EnviarComando(ver[1])).encode())
 
                 except:
                     try:

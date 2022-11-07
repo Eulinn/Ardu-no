@@ -18,24 +18,43 @@ void handleRoot() {
   for (uint8_t i=0; i<server.args(); i++){
     //Caso os parâmetros sejam relay0 e on -> liga o Relê 0
     if ((server.argName(i) == "relay0") && (server.arg(i) == "on")) {
-      digitalWrite(pinOut0, HIGH);
+      if(digitalRead(pinOut0)){
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:juston""}]");
+      }else{
+        digitalWrite(pinOut0, HIGH);
         server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:on""}]");
+        }
+
     }
     //Caso os parâmetros sejam relay0 e on -> desliga o Relê 0    
     else if ((server.argName(i) == "relay0") && (server.arg(i) == "off")) {
-      digitalWrite(pinOut0, LOW);
-      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:off""}]");
+      if(!digitalRead(pinOut0)){
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:justoff""}]");
+      }else{
+        digitalWrite(pinOut0, LOW);
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:off""}]");
+      }
+      
+      
     //Caso os parâmetros sejam relay2 e on -> liga o Relê 2 por 50ms e depois desliga o Relê
     } else if ((server.argName(i) == "relay2") && (server.arg(i) == "on")) {
-      digitalWrite(pinOut2, HIGH);
-      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:on""}]");
+      if(digitalRead(pinOut0)){
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:juston""}]");
+      }else{
+        digitalWrite(pinOut0, HIGH);
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:on""}]");
+        }
     } else if ((server.argName(i) == "relay2") && (server.arg(i) == "off")) {
-      digitalWrite(pinOut2, LOW);
-      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:off""}]");
+      if(!digitalRead(pinOut0)){
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:justoff""}]");
+      }else{
+        digitalWrite(pinOut0, LOW);
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:off""}]");
+      }
     }
   }
   //Caso seja recebido algum parâmetro incompatível, retorna msg de erro para o cliente
-  server.send(200, "text/html", "Erro nos parâmetros");
+  server.send(200, "text/html; charset=utf-8", "Erro nos parâmetros");
 
 }
 

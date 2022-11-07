@@ -1447,6 +1447,7 @@ class Ui_MainWindow(object):
         self.layoutdsp1.addWidget(self.nada2)
 
         self.btn_lig_1 = QPushButton()
+        self.btn_lig_1.setObjectName("Ligar1")
         self.btn_lig_1.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_lig_1.setFont(font)
         self.btn_lig_1.setMaximumWidth(200)
@@ -1460,6 +1461,7 @@ class Ui_MainWindow(object):
         
 
         self.btn_deslig_1 = QPushButton()
+        self.btn_deslig_1.setObjectName("Desligar1")
         self.btn_deslig_1.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_deslig_1.setFont(font)
         self.btn_deslig_1.setMaximumWidth(200)
@@ -1515,6 +1517,7 @@ class Ui_MainWindow(object):
         self.layoutdsp2.addWidget(self.nada2)
 
         self.btn_lig_2 = QPushButton()
+        self.btn_lig_2.setObjectName("Ligar2")
         self.btn_lig_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_lig_2.setFont(font)
         self.btn_lig_2.setMaximumWidth(200)
@@ -1527,6 +1530,7 @@ class Ui_MainWindow(object):
         
 
         self.btn_deslig_2 = QPushButton()
+        self.btn_deslig_2.setObjectName("Desligar2")
         self.btn_deslig_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_deslig_2.setFont(font)
         self.btn_deslig_2.setMaximumWidth(200)

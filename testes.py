@@ -8,7 +8,7 @@ except OSError as erro:
 
 
 
-print(rq)
+print(rq.text)
 
 
 

@@ -17,7 +17,6 @@
 from time import sleep
 import sys
 import os
-import platform
 import socket
 from _thread import start_new_thread
 
@@ -47,7 +46,13 @@ class MainWindow(QMainWindow):
         "Dispositivo Ligado",
         "Dispositivo Desligado",
         "Login indisponível sem conexão!",
-        "Conecte-se para acessar dispositivos!"]
+        "Conecte-se para acessar dispositivos!",
+        "PinOut0 ligado",#13
+        "PinOut0 Desligado",#14
+        "PinOut2 ligado",#15
+        "PinOut2 Desligado",#16
+        "Dispositivo com Erro"#17
+        ]
 
         self.usuario = None
         
@@ -100,6 +105,10 @@ class MainWindow(QMainWindow):
         widgets.Login.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
+        widgets.btn_lig_1.clicked.connect(self.buttonClick)
+        widgets.btn_lig_2.clicked.connect(self.buttonClick)
+        widgets.btn_deslig_1.clicked.connect(self.buttonClick)
+        widgets.btn_deslig_2.clicked.connect(self.buttonClick)
 
 
         # EXTRA LEFT BOX
@@ -165,6 +174,16 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
         else:
             start_new_thread(self.MSGTemp,(12,2,widgets))
+        
+
+        if btnName == 'Ligar1':
+            start_new_thread(self.enviarcomando,('pin-0=on',''))
+        if btnName == 'Ligar2':
+            start_new_thread(self.enviarcomando,('pin-2=on',''))
+        if btnName == 'Desligar1':
+            start_new_thread(self.enviarcomando,('pin-0=off',''))
+        if btnName == 'Desligar2':
+            start_new_thread(self.enviarcomando,('pin-2=off',''))
 
 
 
@@ -248,6 +267,19 @@ class MainWindow(QMainWindow):
         sleep(temp)
         self.msgs = True
     
+
+    def enviarcomando(self,comando,a):
+        try:
+            self.serverP.send(comando.encode())
+            while True:
+                msg = self.serverP.recv(32).decode('utf-8')
+                if msg:
+                    widgets.titleRightInfo.setText(self.mensagens[int(msg)])
+                    break
+        except OSError as erro:
+            widgets.titleRightInfo.setText(self.mensagens[7])
+            print(erro)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
