@@ -4,53 +4,50 @@
 #include <ESP8266mDNS.h> //Multicast MDNS (Ex. esp8266.local)
 
 
-const char* ssid = "node6"; //SSID do roteador WIFI
-const char* password = "840D8EAD9973"; //Senha do roteador WIFI
+const char* ssid = "node4"; //SSID do roteador WIFI
+const char* password = "cc50e3c19eea"; //Senha do roteador WIFI
 
 ESP8266WebServer server(80); //Cria um serviço WEB na porta 80
 
 const int pinOut0 = 0; //Configura o pino 0 do ESP-01
 const int pinOut2 = 2; //Configura o pino 2 do ESP-01
+const bool statusR0 = false;
+const bool statusR2 = false;
 
 //Manipula as requisições recebidas na página principal
 void handleRoot() { 
 
   for (uint8_t i=0; i<server.args(); i++){
     //Caso os parâmetros sejam relay0 e on -> liga o Relê 0
-    if ((server.argName(i) == "relay0") && (server.arg(i) == "on")) {
-      if(digitalRead(pinOut0)){
-        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:juston""}]");
-      }else{
+    if ((server.argName(i) == "relay0") && (server.arg(i) == "on") && (statusR0 == false)) {
         digitalWrite(pinOut0, HIGH);
+        statusR0 = true;
         server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:on""}]");
-        }
-
+    }else{
+      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:juston""}]");
     }
     //Caso os parâmetros sejam relay0 e on -> desliga o Relê 0    
-    else if ((server.argName(i) == "relay0") && (server.arg(i) == "off")) {
-      if(!digitalRead(pinOut0)){
-        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:justoff""}]");
-      }else{
-        digitalWrite(pinOut0, LOW);
-        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:off""}]");
-      }
-      
-      
-    //Caso os parâmetros sejam relay2 e on -> liga o Relê 2 por 50ms e depois desliga o Relê
-    } else if ((server.argName(i) == "relay2") && (server.arg(i) == "on")) {
-      if(digitalRead(pinOut0)){
-        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:juston""}]");
-      }else{
+    if ((server.argName(i) == "relay0") && (server.arg(i) == "off") && (statusR0 == true)) {
+      digitalWrite(pinOut0, LOW);
+      statusR0 = false;
+      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:off""}]");
+  
+    } else{
+      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay0:justoff""}]");
+    }
+      if ((server.argName(i) == "relay2") && (server.arg(i) == "on") && (relay2 == false)) {
         digitalWrite(pinOut0, HIGH);
+        relay2 = true;
         server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:on""}]");
-        }
-    } else if ((server.argName(i) == "relay2") && (server.arg(i) == "off")) {
-      if(!digitalRead(pinOut0)){
-        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:justoff""}]");
-      }else{
+    }else{
+        server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:juston""}]");
+    }
+    if ((server.argName(i) == "relay2") && (server.arg(i) == "off") && (relay2 == true)) {
         digitalWrite(pinOut0, LOW);
+        relay2 = false;
         server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:off""}]");
-      }
+    }else{
+      server.send(200,"Content-Type: application/json; charset=utf-8","[{""relay2:justoff""}]");
     }
   }
   //Caso seja recebido algum parâmetro incompatível, retorna msg de erro para o cliente
