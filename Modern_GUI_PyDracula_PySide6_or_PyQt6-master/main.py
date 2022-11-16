@@ -32,6 +32,7 @@ widgets = None
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        self.pins = []
         self.msgs = True
         self.conected = False
         self.mensagens=['Arduino inexistente ou não conectado!!',

@@ -1,6 +1,7 @@
 import requests
 import socket
 from _thread import *
+import sqlite3
 
 class Main():
     def __init__(self) -> None:
@@ -17,6 +18,8 @@ class Main():
 
     def server(self):
         try:
+            self.banco = sqlite3.connect('./banco/arducontole.db')
+            self.cursor = self.banco.cursor()
             self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.serverP.bind((socket.gethostname(),2306))
             self.serverP.listen()
@@ -75,7 +78,7 @@ class Main():
                     ver = msg.split('-')
                     if ver[0] == "lg":
                         Verificar = ver[1].split(";")
-                        if(Verificar[0] == "eulin" and Verificar[1] == "1234"):
+                        if(self.verificarUsuario(Verificar[0],Verificar[1])):
                             cliente.send("6".encode())
                         else:
                             cliente.send('5'.encode())
@@ -87,6 +90,18 @@ class Main():
                         cliente.send("7".encode())
                     except:
                         self.clientes.remove(cliente)
+    
+
+    def verificarUsuario(self,nome,senha):
+        try:
+            self.cursor.execute(f'SELECT * FROM usuario WHERE nome_usu = "{nome}" and senha_usu = "{senha}"')
+            if(len(self.cursor.fetchall()) == 1):
+                return True
+            else:
+                return False
+        
+        except:
+            return False
 
 
             
