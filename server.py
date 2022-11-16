@@ -52,10 +52,18 @@ class Main():
                 return 16
             elif (rq.text == r'[{relay2:on}]'):
                 return 15
-            else:
+            elif (rq.text == r'[{relay0:justoff}]'):
+                return 18
+            elif (rq.text == r'[{relay0:juston}]'):
                 return 17
+            elif (rq.text == r'[{relay2:justoff}]'):
+                return 20
+            elif (rq.text == r'[{relay2:juston}]'):
+                return 19
+            else:
+                return 22
         except OSError as erro:
-            return 15
+            return 21
 
             
 

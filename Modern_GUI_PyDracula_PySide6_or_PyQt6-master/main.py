@@ -51,7 +51,12 @@ class MainWindow(QMainWindow):
         "PinOut0 Desligado",#14
         "PinOut2 ligado",#15
         "PinOut2 Desligado",#16
-        "Dispositivo com Erro"#17
+        "PinOut0 Já está ligado",#17
+        "PinOut0 Já está Desligado",#18
+        "PinOut2 Já está ligado",#19
+        "PinOut2 Já está Desligado",#20
+        "Dispositivo com Erro",#21
+        "Mensagem Inesperada"#22
         ]
 
         self.usuario = None
@@ -184,6 +189,7 @@ class MainWindow(QMainWindow):
             start_new_thread(self.enviarcomando,('pin-0=off',''))
         if btnName == 'Desligar2':
             start_new_thread(self.enviarcomando,('pin-2=off',''))
+
 
 
 

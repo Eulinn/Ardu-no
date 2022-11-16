@@ -8,8 +8,3 @@ except OSError as erro:
     print(erro)
 
 
-
-
-
-
-
