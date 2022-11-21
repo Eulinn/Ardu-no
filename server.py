@@ -104,6 +104,18 @@ class Main():
             return False
 
 
+    def Cadastro(self,nome,senha):
+        try:
+            self.cursor.execute(f'SELECT * FROM usuario WHERE nome_usu = "{nome}"')
+            if(len(self.cursor.fetchall()) == 1):
+                return 23
+            else:
+                self.cursor.execute(f"INSERT INTO usuario ()")
+                return 24
+        
+        except:
+            return 22
+
             
 
     

@@ -57,7 +57,9 @@ class MainWindow(QMainWindow):
         "PinOut2 Já está ligado",#19
         "PinOut2 Já está Desligado",#20
         "Dispositivo com Erro",#21
-        "Mensagem Inesperada"#22
+        "Mensagem Inesperada",#22
+        "Usuário Já Existente",#23
+        "Cadastrado"#24
         ]
 
         self.usuario = None
