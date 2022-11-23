@@ -192,6 +192,8 @@ class MainWindow(QMainWindow):
             start_new_thread(self.enviarcomando,('pin-0=off',''))
         if btnName == 'Desligar2':
             start_new_thread(self.enviarcomando,('pin-2=off',''))
+        
+        print(f"botao clicado {btnName}")
 
 
 

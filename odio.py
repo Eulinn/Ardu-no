@@ -5,11 +5,12 @@ import sqlite3
 
 #self.verificarUsuario(Verificar[0],Verificar[1])
 
-db = sqlite3.connect('./banco/arducontrole.db')
+db = sqlite3.connect('./banco/arducontole.db')
 cursor = db.cursor()
 
-cursor.execute(f'SELECT * FROM usuario')
-print(cursor.fetchall())
+cursor.execute(f'SELECT * FROM usuario WHERE nome="eulin" and senha="1234"')
+lista = cursor.fetchall()
+print(lista)
 
 
 

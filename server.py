@@ -18,7 +18,7 @@ class Main():
 
     def server(self):
         try:
-            self.banco = sqlite3.connect('./banco/arducontole.db')
+            self.banco = sqlite3.connect('./banco/arducontole.db',check_same_thread=False)
             self.cursor = self.banco.cursor()
             self.serverP = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.serverP.bind((socket.gethostname(),2306))
@@ -80,12 +80,14 @@ class Main():
                         Verificar = ver[1].split(";")
                         if(self.verificarUsuario(Verificar[0],Verificar[1])):
                             cliente.send("6".encode())
+                            
                         else:
                             cliente.send('5'.encode())
                     if ver[0] == 'pin':
                         cliente.send(str(self.EnviarComando(ver[1])).encode())
 
-                except:
+                except OSError as erro:
+                    print(erro)
                     try:
                         cliente.send("7".encode())
                     except:
@@ -94,13 +96,17 @@ class Main():
 
     def verificarUsuario(self,nome,senha):
         try:
-            self.cursor.execute(f'SELECT * FROM usuario WHERE nome_usu = "{nome}" and senha_usu = "{senha}"')
+            self.cursor.execute(f'SELECT * FROM usuario WHERE nome="{nome}" and senha="{senha}"')
             if(len(self.cursor.fetchall()) == 1):
+                self.banco.commit()
                 return True
             else:
+                self.banco.commit()
                 return False
         
-        except:
+        except OSError as erro:
+            self.banco.commit()
+            print(erro)
             return False
 
 
@@ -108,9 +114,11 @@ class Main():
         try:
             self.cursor.execute(f'SELECT * FROM usuario WHERE nome_usu = "{nome}"')
             if(len(self.cursor.fetchall()) == 1):
+                self.banco.commit()
                 return 23
             else:
                 self.cursor.execute(f'INSERT INTO usuario values("{nome}","{senha}",1)')
+                self.banco.commit()
                 return 24
         
         except:
