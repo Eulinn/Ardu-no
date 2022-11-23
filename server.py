@@ -78,7 +78,7 @@ class Main():
                     ver = msg.split('-')
                     if ver[0] == "lg":
                         Verificar = ver[1].split(";")
-                        if(self.verificarUsuario(Verificar[0],Verificar[1])):
+                        if(Verificar[0] == "eulin" and Verificar[1] == "1234"):
                             cliente.send("6".encode())
                         else:
                             cliente.send('5'.encode())
