@@ -78,7 +78,7 @@ class Main():
                     ver = msg.split('-')
                     if ver[0] == "lg":
                         Verificar = ver[1].split(";")
-                        if(Verificar[0] == "eulin" and Verificar[1] == "1234"):
+                        if(self.verificarUsuario(Verificar[0],Verificar[1])):
                             cliente.send("6".encode())
                         else:
                             cliente.send('5'.encode())
@@ -110,7 +110,7 @@ class Main():
             if(len(self.cursor.fetchall()) == 1):
                 return 23
             else:
-                self.cursor.execute(f"INSERT INTO usuario ()")
+                self.cursor.execute(f'INSERT INTO usuario values("{nome}","{senha}",0)')
                 return 24
         
         except:
