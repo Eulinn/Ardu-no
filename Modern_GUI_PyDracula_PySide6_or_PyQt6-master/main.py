@@ -111,6 +111,8 @@ class MainWindow(QMainWindow):
         widgets.btn_widgets.clicked.connect(self.buttonClick)
         widgets.btn_dispositivos.clicked.connect(self.buttonClick)
         widgets.Login.clicked.connect(self.buttonClick)
+        widgets.botaocadastro.clicked.connect(self.buttonClick)
+        widgets.botaologin.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
         widgets.btn_lig_1.clicked.connect(self.buttonClick)
@@ -183,6 +185,9 @@ class MainWindow(QMainWindow):
         else:
             start_new_thread(self.MSGTemp,(12,2,widgets))
         
+        if btnName == "Cadastro":
+            widgets.stackedWidget.setCurrentWidget(widgets.cad_page)
+        
 
         if btnName == 'Ligar1':
             start_new_thread(self.enviarcomando,('pin-0=on',''))
@@ -196,7 +201,8 @@ class MainWindow(QMainWindow):
         print(f"botao clicado {btnName}")
 
 
-
+        if btnName == "login_2":
+            widgets.stackedWidget.setCurrentWidget(widgets.login_page)
 
 
         if btnName == "login":

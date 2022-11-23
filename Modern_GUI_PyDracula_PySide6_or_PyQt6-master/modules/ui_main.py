@@ -1397,8 +1397,6 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.new_page)
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
-
 
 #FIM DO CÓDIGO AQUI
 
@@ -1553,6 +1551,79 @@ class Ui_MainWindow(object):
 
 
 
+        self.cad_page = QWidget()
+        self.cad_page.setObjectName(u"cad_page")
+        self.layoutcaddd = QHBoxLayout(self.cad_page)
+        self.layoutcaddd.setObjectName(u"layoutcaddd")
+
+
+
+
+        self.widget_cadastro = QWidget()
+        self.widget_cadastro.setObjectName("Cadastro")
+        self.widget_cadastro.setMaximumWidth(300)
+        self.widget_cadastro.setMaximumHeight(250)
+
+        self.layoutcadastro = QVBoxLayout(self.widget_cadastro)
+
+        self.titulocadastro = QLabel()
+        self.titulocadastro.setAlignment(Qt.AlignCenter)
+        self.titulocadastro.setStyleSheet("font-size:19px;")
+
+        self.usuario_cad = QLineEdit()
+        self.usuario_cad.setMinimumHeight(50)
+        self.usuario_cad.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.senha_cad = QLineEdit()
+        self.senha_cad.setMinimumHeight(50)
+        self.senha_cad.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.senha_conf_cad = QLineEdit()
+        self.senha_conf_cad.setMinimumHeight(50)
+        self.senha_conf_cad.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.botaoenviar_cad = QPushButton()
+        self.botaoenviar_cad.setObjectName(u"Logenviar")
+        self.botaoenviar_cad.setMinimumHeight(50)
+        self.botaoenviar_cad.setFont(font)
+        self.botaoenviar_cad.setCursor(QCursor(Qt.PointingHandCursor))
+        self.botaoenviar_cad.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/icons/cil-cursor.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.botaoenviar_cad.setIcon(icon4)
+
+        self.botaologin = QPushButton()
+        self.botaologin.setObjectName(u"login_2")
+        self.botaologin.setMinimumHeight(50)
+        self.botaologin.setFont(font)
+        self.botaologin.setCursor(QCursor(Qt.PointingHandCursor))
+        self.botaologin.setStyleSheet(u'''
+        background-color: rgb(44, 49, 60);
+        color: rgb(255, 170, 255);
+        margin:13;
+        ''')
+
+
+
+
+
+        self.layoutcadastro.addWidget(self.titulocadastro)#dentro do amarelo
+        self.layoutcadastro.addWidget(self.usuario_cad)
+        self.layoutcadastro.addWidget(self.senha_cad)
+        self.layoutcadastro.addWidget(self.senha_conf_cad)
+        self.layoutcadastro.addWidget(self.botaoenviar_cad)
+        self.layoutcadastro.addWidget(self.botaologin)
+
+        
+
+        self.layoutcaddd.addWidget(self.widget_cadastro)
+
+        self.stackedWidget.addWidget(self.cad_page)
+
+
+
+
+
 
 
 
@@ -1566,6 +1637,10 @@ class Ui_MainWindow(object):
         self.login_page.setObjectName(u"login_page")
         self.verticalLayout_20 = QHBoxLayout(self.login_page)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+
+
+
+
 
 
         
@@ -1600,7 +1675,7 @@ class Ui_MainWindow(object):
         self.botaoenviar.setIcon(icon4)
 
         self.botaocadastro = QPushButton()
-        self.botaocadastro.setObjectName(u"Logenviar")
+        self.botaocadastro.setObjectName(u"Cadastro")
         self.botaocadastro.setMinimumHeight(50)
         self.botaocadastro.setFont(font)
         self.botaocadastro.setCursor(QCursor(Qt.PointingHandCursor))
@@ -1626,7 +1701,13 @@ class Ui_MainWindow(object):
         
         self.stackedWidget.addWidget(self.login_page)#mais um widget inteiro
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
+
+
+
+
+
+
+        self.verticalLayout_15.addWidget(self.stackedWidget) #POR ULTIMO
 
         
 
@@ -1878,11 +1959,20 @@ class Ui_MainWindow(object):
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"Euler Couto Barreto", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
         self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
+        self.titulocadastro.setText(QCoreApplication.translate("MainWindow", u"CADASTRO", None))
 
         self.usuario.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
         self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
+        self.usuario_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
+        self.senha_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
+        self.senha_conf_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Confirmar Senha", None))
+
+
+
         self.botaoenviar.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
+        self.botaoenviar_cad.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
         self.botaocadastro.setText(QCoreApplication.translate("MainWindow", u"Cadastrar", None))
+        self.botaologin.setText(QCoreApplication.translate("MainWindow", u"Logar", None))
         self.nomelb.setText(QCoreApplication.translate("MainWindow", u"Dispositivo 1", None))
         self.nomelb2.setText(QCoreApplication.translate("MainWindow", u"Dispositivo 2", None))
         self.btn_lig_1.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
