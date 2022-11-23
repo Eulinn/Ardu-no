@@ -5,7 +5,11 @@ import sqlite3
 
 #self.verificarUsuario(Verificar[0],Verificar[1])
 
+db = sqlite3.connect('./banco/arducontrole.db')
+cursor = db.cursor()
 
+cursor.execute(f'SELECT * FROM usuario')
+print(cursor.fetchall())
 
 
 

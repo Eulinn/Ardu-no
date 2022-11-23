@@ -110,7 +110,7 @@ class Main():
             if(len(self.cursor.fetchall()) == 1):
                 return 23
             else:
-                self.cursor.execute(f'INSERT INTO usuario values("{nome}","{senha}",0)')
+                self.cursor.execute(f'INSERT INTO usuario values("{nome}","{senha}",1)')
                 return 24
         
         except:
