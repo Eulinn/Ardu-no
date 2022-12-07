@@ -36,18 +36,18 @@ class MainWindow(QMainWindow):
         self.msgs = True
         self.conected = False
         self.mensagens=['Arduino inexistente ou não conectado!!',
-        "Enviado",
-        "Conectando ao server...",
-        "Server conectado, vá para a aba de LOGIN!",
-        "Servidor Não Conectado, tentando conectar novamente!",
-        "Login Inválido!",
-        "Login validado",
-        "Erro no servidor",
-        "Esperando resposta...",
-        "Dispositivo Ligado",
-        "Dispositivo Desligado",
-        "Login indisponível sem conexão!",
-        "Conecte-se para acessar dispositivos!",
+        "Enviado",#1
+        "Conectando ao server...",#2
+        "Server conectado, vá para a aba de LOGIN!",#3
+        "Servidor Não Conectado, tentando conectar novamente!",#4
+        "Login Inválido!",#5
+        "Login validado",#6
+        "Erro no servidor",#7
+        "Esperando resposta...",#8
+        "Dispositivo Ligado",#9
+        "Dispositivo Desligado",#10
+        "Login indisponível sem conexão!",#11
+        "Conecte-se para acessar dispositivos!",#12
         "PinOut0 ligado",#13
         "PinOut0 Desligado",#14
         "PinOut2 ligado",#15
@@ -119,6 +119,7 @@ class MainWindow(QMainWindow):
         widgets.btn_lig_2.clicked.connect(self.buttonClick)
         widgets.btn_deslig_1.clicked.connect(self.buttonClick)
         widgets.btn_deslig_2.clicked.connect(self.buttonClick)
+        widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
 
 
         # EXTRA LEFT BOX
@@ -212,6 +213,11 @@ class MainWindow(QMainWindow):
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             else:
                 start_new_thread(self.MSGTemp,(11,2,widgets))
+        
+        if btnName == "Cadenviar":
+            if(widgets.usuario_cad.text() != "" and widgets.senha_cad.text() != ""):
+                start_new_thread(self.validarLogin,(widgets,None))
+                
 
         if btnName == "Logenviar" and self.usuario == None:
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
@@ -258,6 +264,27 @@ class MainWindow(QMainWindow):
                     break
                 elif int(msg) == 7:
                     widgets.titleRightInfo.setText(self.mensagens[7])
+                    break
+    
+    def validarCadastro(self,widgets,a):
+        us = widgets.usuario_cad.text()
+        sh = widgets.senha_cad.text()
+
+        self.serverP.send(f'cad-{us};{sh}'.encode())
+        while True:
+            
+            msg = self.serverP.recv(32).decode("utf-8")
+            if msg:
+                if int(msg) == 23:
+                    widgets.titleRightInfo.setText(self.mensagens[23] + " Tente novamente.")
+                    break
+                elif int(msg) == 24:
+                    widgets.titleRightInfo.setText(self.mensagens[24]+f" Bem Vindo(a), {us}")
+                    widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
+                    self.usuario = us
+                    break
+                elif int(msg) == 22:
+                    widgets.titleRightInfo.setText(self.mensagens[22])
                     break
 
 

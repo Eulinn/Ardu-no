@@ -1583,7 +1583,7 @@ class Ui_MainWindow(object):
         self.senha_conf_cad.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
 
         self.botaoenviar_cad = QPushButton()
-        self.botaoenviar_cad.setObjectName(u"Logenviar")
+        self.botaoenviar_cad.setObjectName(u"Cadenviar")
         self.botaoenviar_cad.setMinimumHeight(50)
         self.botaoenviar_cad.setFont(font)
         self.botaoenviar_cad.setCursor(QCursor(Qt.PointingHandCursor))
