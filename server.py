@@ -85,6 +85,11 @@ class Main():
                             cliente.send('5'.encode())
                     if ver[0] == 'pin':
                         cliente.send(str(self.EnviarComando(ver[1])).encode())
+                    
+                    if ver[0] == 'bloq':
+                        pass
+
+                    
 
                 except OSError as erro:
                     print(erro)
