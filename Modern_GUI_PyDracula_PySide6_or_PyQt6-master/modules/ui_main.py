@@ -16,7 +16,7 @@ from PySide6.QtWidgets import *
 from . resources_rc import *
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,tupla=[('Vazio',"Vazio","Vazio","Vazio")]):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1280, 720)
@@ -691,7 +691,17 @@ class Ui_MainWindow(object):
 
 
 
+        self.historico = QPushButton(self.topMenu)
+        self.historico.setObjectName(u"historico")
+        sizePolicy.setHeightForWidth(self.historico.sizePolicy().hasHeightForWidth())
+        self.historico.setSizePolicy(sizePolicy)
+        self.historico.setMinimumSize(QSize(0, 45))
+        self.historico.setFont(font)
+        self.historico.setCursor(QCursor(Qt.PointingHandCursor))
+        self.historico.setLayoutDirection(Qt.LeftToRight)
+        self.historico.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-history.png);")
 
+        self.verticalLayout_8.addWidget(self.historico)
 
 
 
@@ -1703,6 +1713,65 @@ class Ui_MainWindow(object):
 
 
 
+        self.Historico_page = QWidget()
+        self.Historico_page.setObjectName(u"Historico_page")
+        self.verticalLayout_ht = QVBoxLayout(self.Historico_page)
+        self.verticalLayout_ht.setAlignment(Qt.AlignTop)
+        self.verticalLayout_ht.setObjectName(u"verticalLayout_ht")
+        self.labelHistorico = QLabel(self.Historico_page)
+        self.labelHistorico.setObjectName(u"label")
+        self.labelHistorico.setAlignment(Qt.AlignCenter)
+
+        self.TabelaHitorico = QTableWidget(self.Historico_page)
+        self.TabelaHitorico.setStyleSheet('''
+        QTableView {
+            selection-background-color: rgb(33, 37, 43);
+            color:rgb(255, 170, 255);
+            font-size:17px;
+        }
+        QHeaderView::section{
+            background-color:rgb(40, 44, 52);
+            font-size:15px;
+            border:1px solid rgb(255, 170, 255);
+            color:white;
+        }
+        QTableView QTableCornerButton::section{
+            background-color:rgb(40, 44, 52);
+        }
+        
+        
+        
+        ''')
+        
+        self.TabelaHitorico.setColumnCount(4)
+        self.TabelaHitorico.setHorizontalHeaderLabels(['Usuário','Horário','Data','Ação'])
+        #TEORIA: Isso vai adicionar mais itens posteriormente talvez
+        
+        
+        
+
+
+
+        
+        
+        #self.TabelaHitorico.horizontalHeader().setVisible(False)
+        self.TabelaHitorico.horizontalHeader().setCascadingSectionResizes(True)
+        self.TabelaHitorico.horizontalHeader().setDefaultSectionSize(200)
+        self.TabelaHitorico.horizontalHeader().setStretchLastSection(True)
+        
+
+
+
+
+        self.verticalLayout_ht.addWidget(self.labelHistorico)
+        self.verticalLayout_ht.addWidget(self.TabelaHitorico)
+
+        self.stackedWidget.addWidget(self.Historico_page)
+
+
+
+
+
 
 
 
@@ -1853,6 +1922,7 @@ class Ui_MainWindow(object):
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
         self.btn_dispositivos.setText(QCoreApplication.translate("MainWindow", u"Dispositivos", None))
+        self.historico.setText(QCoreApplication.translate("MainWindow", u"Histórico", None))##
         self.Login.setText(QCoreApplication.translate("MainWindow", u"Login", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
         self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Créditos", None))
@@ -1960,6 +2030,7 @@ class Ui_MainWindow(object):
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
         self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
         self.titulocadastro.setText(QCoreApplication.translate("MainWindow", u"CADASTRO", None))
+        self.labelHistorico.setText(QCoreApplication.translate("MainWindow", u"Histórico - Usuário", None))##
 
         self.usuario.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
         self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
@@ -1979,5 +2050,6 @@ class Ui_MainWindow(object):
         self.btn_deslig_1.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
         self.btn_lig_2.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
         self.btn_deslig_2.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
+
     # retranslateUi
 
