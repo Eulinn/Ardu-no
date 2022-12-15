@@ -171,6 +171,7 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.home)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            print(btn.styleSheet())
 
         # SHOW WIDGETS PAGE
         if btnName == "btn_widgets":
