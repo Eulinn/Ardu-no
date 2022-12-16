@@ -113,6 +113,7 @@ class MainWindow(QMainWindow):
         widgets.Login.clicked.connect(self.buttonClick)
         widgets.botaocadastro.clicked.connect(self.buttonClick)
         widgets.botaologin.clicked.connect(self.buttonClick)
+        widgets.historico.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
         widgets.btn_lig_1.clicked.connect(self.buttonClick)
@@ -223,11 +224,28 @@ class MainWindow(QMainWindow):
         if btnName == "Logenviar" and self.usuario == None:
             if(widgets.usuario.text() != "" and widgets.senha.text() != ""):
                 start_new_thread(self.validarLogin,(widgets,None))
+        
+        if btnName == "historico":
+            widgets.stackedWidget.setCurrentWidget(widgets.Historico_page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
                 
                 
 
 
 
+    def AlimentarHistorico(self,widgets,valor_usu,valor_acao,valor_data,valor_horario):
+        usuario = QTableWidgetItem(valor_usu)
+        acao = QTableWidgetItem(valor_acao)
+        data = QTableWidgetItem(valor_data)
+        horario = QTableWidgetItem(valor_horario)
+        qnt = widgets.TabelaHitorico.rowCount()
+        widgets.TabelaHitorico.setRowCount(qnt+1)
+        widgets.TabelaHitorico.setItem(qnt,0,usuario)
+        widgets.TabelaHitorico.setItem(qnt,1,horario)
+        widgets.TabelaHitorico.setItem(qnt,2,data)
+        widgets.TabelaHitorico.setItem(qnt,3,acao)
+            
 
 
 
