@@ -122,6 +122,7 @@ class MainWindow(QMainWindow):
         widgets.btn_deslig_2.clicked.connect(self.buttonClick)
         widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
         widgets.ADM.clicked.connect(self.buttonClick)
+        widgets.BotaoADM.clicked.connect(self.buttonClick)
 
 
         # EXTRA LEFT BOX
@@ -235,6 +236,9 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.AdmPage) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+        
+        if btnName == "ADMenviar":
+            print(widgets.bloq.isChecked())
                 
                 
 
@@ -253,7 +257,8 @@ class MainWindow(QMainWindow):
         widgets.TabelaHitorico.setItem(qnt,3,acao)
             
 
-
+    def valorradio(self):
+        print(widgets.bloq.text())
 
 
 

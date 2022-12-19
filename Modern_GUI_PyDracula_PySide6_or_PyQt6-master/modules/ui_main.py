@@ -684,7 +684,7 @@ class Ui_MainWindow(object):
         self.btn_dispositivos.setFont(font)
         self.btn_dispositivos.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_dispositivos.setLayoutDirection(Qt.LeftToRight)
-        self.btn_dispositivos.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
+        self.btn_dispositivos.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-lightbulb.png);")
 
         self.verticalLayout_8.addWidget(self.btn_dispositivos)
 
@@ -711,7 +711,7 @@ class Ui_MainWindow(object):
         self.ADM.setFont(font)
         self.ADM.setCursor(QCursor(Qt.PointingHandCursor))
         self.ADM.setLayoutDirection(Qt.LeftToRight)
-        self.ADM.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-user.png);")
+        self.ADM.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-devices.png);")
 
         self.verticalLayout_8.addWidget(self.ADM)
 
@@ -1797,6 +1797,7 @@ class Ui_MainWindow(object):
         
         
         self.widgetADM = QWidget()
+        
         self.widgetADM.setObjectName("login_widget")
         self.widgetADM.setMaximumWidth(300)
         self.widgetADM.setMaximumHeight(300)
@@ -1813,7 +1814,7 @@ class Ui_MainWindow(object):
 
         self.widcheck1 = QWidget()
         self.layoutcheck = QHBoxLayout(self.widcheck1)
-        
+
         self.bloq = QRadioButton(self.widgetADM)
         self.desbloq = QRadioButton(self.widgetADM)
 
@@ -1822,24 +1823,25 @@ class Ui_MainWindow(object):
 
         self.widcheck2 = QWidget()
         self.layoutcheck = QHBoxLayout(self.widcheck2)
-        
+
+
         self.disp1 = QRadioButton(self.widgetADM)
         self.disp2 = QRadioButton(self.widgetADM)
 
         self.layoutcheck.addWidget(self.disp1)
         self.layoutcheck.addWidget(self.disp2)
 
-        
 
-        '''self.botaoenviar = QPushButton()
-        self.botaoenviar.setObjectName(u"Logenviar")
-        self.botaoenviar.setMinimumHeight(50)
-        self.botaoenviar.setFont(font)
-        self.botaoenviar.setCursor(QCursor(Qt.PointingHandCursor))
-        self.botaoenviar.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
+
+        self.BotaoADM = QPushButton()
+        self.BotaoADM.setObjectName(u"ADMenviar")
+        self.BotaoADM.setMinimumHeight(50)
+        self.BotaoADM.setFont(font)
+        self.BotaoADM.setCursor(QCursor(Qt.PointingHandCursor))
+        self.BotaoADM.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
         icon4 = QIcon()
         icon4.addFile(u":/icons/images/icons/cil-cursor.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.botaoenviar.setIcon(icon4)'''
+        self.BotaoADM.setIcon(icon4)
 
         
 
@@ -1851,6 +1853,7 @@ class Ui_MainWindow(object):
         self.LayoutADM.addWidget(self.UsuarioADM)
         self.LayoutADM.addWidget(self.widcheck1)
         self.LayoutADM.addWidget(self.widcheck2)
+        self.LayoutADM.addWidget(self.BotaoADM)
 
 
         
@@ -2126,6 +2129,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.label.setText(QCoreApplication.translate("MainWindow", u"NEW PAGE TEST", None))
+        self.tituloADM.setText(QCoreApplication.translate("MainWindow", u"Funções administrador", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"Euler Couto Barreto", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
         self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
@@ -2142,6 +2146,7 @@ class Ui_MainWindow(object):
         self.usuario_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
         self.senha_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))
         self.senha_conf_cad.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Confirmar Senha", None))
+        self.UsuarioADM.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário Requerido", None))
 
 
 
@@ -2155,6 +2160,7 @@ class Ui_MainWindow(object):
         self.btn_deslig_1.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
         self.btn_lig_2.setText(QCoreApplication.translate("MainWindow", u"Ligar", None))
         self.btn_deslig_2.setText(QCoreApplication.translate("MainWindow", u"Desligar", None))
+        self.BotaoADM.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
 
     # retranslateUi
 
