@@ -703,6 +703,18 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.historico)
 
+        self.ADM = QPushButton(self.topMenu)
+        self.ADM.setObjectName(u"ADMBTN")
+        sizePolicy.setHeightForWidth(self.ADM.sizePolicy().hasHeightForWidth())
+        self.ADM.setSizePolicy(sizePolicy)
+        self.ADM.setMinimumSize(QSize(0, 45))
+        self.ADM.setFont(font)
+        self.ADM.setCursor(QCursor(Qt.PointingHandCursor))
+        self.ADM.setLayoutDirection(Qt.LeftToRight)
+        self.ADM.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-user.png);")
+
+        self.verticalLayout_8.addWidget(self.ADM)
+
 
 
 
@@ -1770,6 +1782,94 @@ class Ui_MainWindow(object):
 
 
 
+#---------------adm
+
+        self.AdmPage = QWidget()
+        self.AdmPage.setObjectName(u"AdmPage")
+        self.verticalLayout_20 = QHBoxLayout(self.AdmPage)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+
+
+
+
+
+
+        
+        
+        self.widgetADM = QWidget()
+        self.widgetADM.setObjectName("login_widget")
+        self.widgetADM.setMaximumWidth(300)
+        self.widgetADM.setMaximumHeight(300)
+
+        self.LayoutADM = QVBoxLayout(self.widgetADM)
+
+        self.tituloADM = QLabel()
+        self.tituloADM.setAlignment(Qt.AlignCenter)
+        self.tituloADM.setStyleSheet("font-size:19px;")
+
+        self.UsuarioADM = QLineEdit()
+        self.UsuarioADM.setMinimumHeight(50)
+        self.UsuarioADM.setStyleSheet(u"background-color: rgb(33, 37, 43); margin:10px;")
+
+        self.widcheck1 = QWidget()
+        self.layoutcheck = QHBoxLayout(self.widcheck1)
+        
+        self.bloq = QRadioButton(self.widgetADM)
+        self.desbloq = QRadioButton(self.widgetADM)
+
+        self.layoutcheck.addWidget(self.bloq)
+        self.layoutcheck.addWidget(self.desbloq)
+
+        self.widcheck2 = QWidget()
+        self.layoutcheck = QHBoxLayout(self.widcheck2)
+        
+        self.disp1 = QRadioButton(self.widgetADM)
+        self.disp2 = QRadioButton(self.widgetADM)
+
+        self.layoutcheck.addWidget(self.disp1)
+        self.layoutcheck.addWidget(self.disp2)
+
+        
+
+        '''self.botaoenviar = QPushButton()
+        self.botaoenviar.setObjectName(u"Logenviar")
+        self.botaoenviar.setMinimumHeight(50)
+        self.botaoenviar.setFont(font)
+        self.botaoenviar.setCursor(QCursor(Qt.PointingHandCursor))
+        self.botaoenviar.setStyleSheet(u"background-color: rgb(52, 59, 72); margin:10px;")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/icons/cil-cursor.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.botaoenviar.setIcon(icon4)'''
+
+        
+
+
+
+
+
+        self.LayoutADM.addWidget(self.tituloADM)#dentro do amarelo
+        self.LayoutADM.addWidget(self.UsuarioADM)
+        self.LayoutADM.addWidget(self.widcheck1)
+        self.LayoutADM.addWidget(self.widcheck2)
+
+
+        
+
+        self.verticalLayout_20.addWidget(self.widgetADM)#layout da página toda
+        
+        self.stackedWidget.addWidget(self.AdmPage)#mais um widget inteiro
+#---------------fim adm
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2030,7 +2130,12 @@ class Ui_MainWindow(object):
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
         self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
         self.titulocadastro.setText(QCoreApplication.translate("MainWindow", u"CADASTRO", None))
+        self.ADM.setText(QCoreApplication.translate("MainWindow", u"Administrador", None))
         self.labelHistorico.setText(QCoreApplication.translate("MainWindow", u"Histórico - Usuário", None))##
+        self.bloq.setText(QCoreApplication.translate("MainWindow", u"Bloquear", None))
+        self.desbloq.setText(QCoreApplication.translate("MainWindow", u"Desbloquear", None))
+        self.disp1.setText(QCoreApplication.translate("MainWindow", u"Disp - 1", None))
+        self.disp2.setText(QCoreApplication.translate("MainWindow", u"Disp - 2", None))
 
         self.usuario.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Usuário", None))
         self.senha.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Senha", None))

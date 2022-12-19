@@ -121,6 +121,7 @@ class MainWindow(QMainWindow):
         widgets.btn_deslig_1.clicked.connect(self.buttonClick)
         widgets.btn_deslig_2.clicked.connect(self.buttonClick)
         widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
+        widgets.ADM.clicked.connect(self.buttonClick)
 
 
         # EXTRA LEFT BOX
@@ -227,6 +228,11 @@ class MainWindow(QMainWindow):
         
         if btnName == "historico":
             widgets.stackedWidget.setCurrentWidget(widgets.Historico_page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+        
+        if btnName == "ADMBTN":
+            widgets.stackedWidget.setCurrentWidget(widgets.AdmPage) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
                 
