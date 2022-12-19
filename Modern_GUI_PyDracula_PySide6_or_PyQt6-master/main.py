@@ -32,7 +32,7 @@ widgets = None
 
 class MainWindow(QMainWindow):
     def __init__(self):
-        self.pins = []
+        self.permis = 0
         self.msgs = True
         self.conected = False
         self.mensagens=['Arduino inexistente ou não conectado!!',
@@ -59,7 +59,10 @@ class MainWindow(QMainWindow):
         "Dispositivo com Erro",#21
         "Mensagem Inesperada",#22
         "Usuário Já Existente",#23
-        "Cadastrado"#24
+        "Cadastrado",#24
+        "Conecte-se para acessar o histórico!",#25
+        "Você não pode acessar essa função",#26
+        "Conecte-se para acessar essa função"#27
         ]
 
         self.usuario = None
@@ -108,12 +111,13 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_widgets.clicked.connect(self.buttonClick)
+        #widgets.btn_widgets.clicked.connect(self.buttonClick)
         widgets.btn_dispositivos.clicked.connect(self.buttonClick)
         widgets.Login.clicked.connect(self.buttonClick)
         widgets.botaocadastro.clicked.connect(self.buttonClick)
         widgets.botaologin.clicked.connect(self.buttonClick)
         widgets.historico.clicked.connect(self.buttonClick)
+        widgets.ADM.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
         widgets.btn_lig_1.clicked.connect(self.buttonClick)
@@ -121,7 +125,6 @@ class MainWindow(QMainWindow):
         widgets.btn_deslig_1.clicked.connect(self.buttonClick)
         widgets.btn_deslig_2.clicked.connect(self.buttonClick)
         widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
-        widgets.ADM.clicked.connect(self.buttonClick)
         widgets.BotaoADM.clicked.connect(self.buttonClick)
 
 
@@ -183,12 +186,15 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW NEW PAGE
-        if btnName == "btn_dispositivos" and self.usuario != None:
-            widgets.stackedWidget.setCurrentWidget(widgets.Dispositivos) # SET PAGE
-            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
-        else:
-            start_new_thread(self.MSGTemp,(12,2,widgets))
+        
+        if btnName == "btn_dispositivos":
+            if self.usuario != None:
+                widgets.stackedWidget.setCurrentWidget(widgets.Dispositivos) # SET PAGE
+                UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+                btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            else:
+                start_new_thread(self.MSGTemp,(12,2,widgets))
+
         
         if btnName == "Cadastro":
             widgets.stackedWidget.setCurrentWidget(widgets.cad_page)
@@ -228,19 +234,28 @@ class MainWindow(QMainWindow):
                 start_new_thread(self.validarLogin,(widgets,None))
         
         if btnName == "historico":
-            widgets.stackedWidget.setCurrentWidget(widgets.Historico_page) # SET PAGE
-            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            if(self.usuario != None):
+                widgets.stackedWidget.setCurrentWidget(widgets.Historico_page) # SET PAGE
+                UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+                btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            else:
+                start_new_thread(self.MSGTemp,(25,2,widgets))
         
         if btnName == "ADMBTN":
-            widgets.stackedWidget.setCurrentWidget(widgets.AdmPage) # SET PAGE
-            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            if self.usuario != None:
+                if self.permis == 1:
+                    widgets.stackedWidget.setCurrentWidget(widgets.AdmPage) # SET PAGE
+                    UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+                    btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+                else:
+                    start_new_thread(self.MSGTemp,(26,2.5,widgets))
+            else:
+                start_new_thread(self.MSGTemp,(27,2,widgets))
         
         if btnName == "ADMenviar":
-            print(widgets.bloq.isChecked())
+            pass
                 
-                
+
 
 
 
@@ -259,8 +274,7 @@ class MainWindow(QMainWindow):
 
     def valorradio(self):
         print(widgets.bloq.text())
-
-
+    
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
@@ -284,15 +298,29 @@ class MainWindow(QMainWindow):
             
             msg = self.serverP.recv(32).decode("utf-8")
             if msg:
-                if int(msg) == 5:
+                msg2 = msg.split()
+                if int(msg2[0]) == 5:
                     widgets.titleRightInfo.setText(self.mensagens[5] + " Tente novamente.")
                     break
-                elif int(msg) == 6:
-                    widgets.titleRightInfo.setText(self.mensagens[6]+f" Bem Vindo(a), {us}")
-                    widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
-                    self.usuario = us
-                    break
-                elif int(msg) == 7:
+                elif int(msg2[0]) == 6:
+                    codigo = msg2[1]
+                    if(codigo == "0"):
+                        print("aq krlh1")
+                        widgets.titleRightInfo.setText(self.mensagens[6]+f" Bem Vindo(a), {us}")
+                        widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
+                        self.usuario = us
+                        print("aaaa2")
+                        break
+                    if(codigo == "1"):
+                        print("aq krlh2")
+                        widgets.titleRightInfo.setText(self.mensagens[6]+f" Bem Vindo(a), {us}")
+                        widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
+                        self.usuario = us
+                        self.permis = 1
+                        print("aaaa3")
+
+                        break
+                elif int(msg2[0]) == 7:
                     widgets.titleRightInfo.setText(self.mensagens[7])
                     break
     

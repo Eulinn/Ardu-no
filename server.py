@@ -78,8 +78,8 @@ class Main():
                     ver = msg.split('-')
                     if ver[0] == "lg":
                         Verificar = ver[1].split(";")
-                        if(self.verificarUsuario(Verificar[0],Verificar[1])):
-                            cliente.send("6".encode())
+                        if(self.verificarUsuario(Verificar[0],Verificar[1],cliente)):
+                            print("passou login")
                             
                         else:
                             cliente.send('5'.encode())
@@ -99,11 +99,21 @@ class Main():
                         self.clientes.remove(cliente)
     
 
-    def verificarUsuario(self,nome,senha):
+    def verificarUsuario(self,nome,senha,cliente):
         try:
             self.cursor.execute(f'SELECT * FROM usuario WHERE nome="{nome}" and senha="{senha}"')
-            if(len(self.cursor.fetchall()) == 1):
+            com = self.cursor.fetchall()
+            if(len(com) == 1):
+                print("len passou")
                 self.banco.commit()
+                if(com[0][3] == 0):
+                    cliente.send("6 0".encode())
+                    print("aa1")
+                else:
+                    cliente.send("6 1".encode())
+                    print("aa2")
+
+
                 return True
             else:
                 self.banco.commit()

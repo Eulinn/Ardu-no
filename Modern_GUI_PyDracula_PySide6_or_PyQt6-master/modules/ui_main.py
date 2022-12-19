@@ -664,7 +664,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_home)
 
-        self.btn_widgets = QPushButton(self.topMenu)
+        '''self.btn_widgets = QPushButton(self.topMenu)
         self.btn_widgets.setObjectName(u"btn_widgets")
         sizePolicy.setHeightForWidth(self.btn_widgets.sizePolicy().hasHeightForWidth())
         self.btn_widgets.setSizePolicy(sizePolicy)
@@ -674,7 +674,7 @@ class Ui_MainWindow(object):
         self.btn_widgets.setLayoutDirection(Qt.LeftToRight)
         self.btn_widgets.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-gamepad.png);")
 
-        self.verticalLayout_8.addWidget(self.btn_widgets)
+        self.verticalLayout_8.addWidget(self.btn_widgets)'''
 
         self.btn_dispositivos = QPushButton(self.topMenu)
         self.btn_dispositivos.setObjectName(u"btn_dispositivos")
@@ -708,13 +708,13 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.ADM.sizePolicy().hasHeightForWidth())
         self.ADM.setSizePolicy(sizePolicy)
         self.ADM.setMinimumSize(QSize(0, 45))
-        self.ADM.setFont(font)
         self.ADM.setCursor(QCursor(Qt.PointingHandCursor))
         self.ADM.setLayoutDirection(Qt.LeftToRight)
         self.ADM.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-devices.png);")
+        self.ADM.setText(QCoreApplication.translate("MainWindow", u"Administrador", None))
+        
 
         self.verticalLayout_8.addWidget(self.ADM)
-
 
 
 
@@ -2023,7 +2023,7 @@ class Ui_MainWindow(object):
         self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Modern GUI / Flat Style", None))
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
-        self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
+        #self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
         self.btn_dispositivos.setText(QCoreApplication.translate("MainWindow", u"Dispositivos", None))
         self.historico.setText(QCoreApplication.translate("MainWindow", u"Histórico", None))##
         self.Login.setText(QCoreApplication.translate("MainWindow", u"Login", None))
@@ -2134,7 +2134,7 @@ class Ui_MainWindow(object):
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
         self.tituloLogin.setText(QCoreApplication.translate("MainWindow", u"LOGIN", None))
         self.titulocadastro.setText(QCoreApplication.translate("MainWindow", u"CADASTRO", None))
-        self.ADM.setText(QCoreApplication.translate("MainWindow", u"Administrador", None))
+        
         self.labelHistorico.setText(QCoreApplication.translate("MainWindow", u"Histórico - Usuário", None))##
         self.bloq.setText(QCoreApplication.translate("MainWindow", u"Bloquear", None))
         self.desbloq.setText(QCoreApplication.translate("MainWindow", u"Desbloquear", None))
