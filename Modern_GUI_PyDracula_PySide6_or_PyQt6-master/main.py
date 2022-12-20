@@ -121,7 +121,6 @@ class MainWindow(QMainWindow):
         widgets.botaologin.clicked.connect(self.buttonClick)
         widgets.historico.clicked.connect(self.buttonClick)
         widgets.ADM.clicked.connect(self.buttonClick)
-        widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
         widgets.btn_lig_1.clicked.connect(self.buttonClick)
@@ -213,7 +212,6 @@ class MainWindow(QMainWindow):
         if btnName == 'Desligar2':
             start_new_thread(self.enviarcomando,(f'pin-2=off;{self.usuario}',''))
         
-        print(f"botao clicado {btnName}")
 
 
         if btnName == "login_2":
@@ -269,8 +267,9 @@ class MainWindow(QMainWindow):
         
 
         if btnName == 'Cadenviar':
+            print("botao clicou aqui cad cad")
             if(widgets.usuario_cad.text() != "" and widgets.senha_cad.text() != ""):
-                start_new_thread(self.validarCadastro,(widgets,None))
+                self.validarCadastro(widgets,None)
 
                 
 
@@ -327,7 +326,7 @@ class MainWindow(QMainWindow):
                         widgets.titleRightInfo.setText(self.mensagens[6]+f" Bem Vindo(a), {us}")
                         widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
                         self.usuario = us
-                        print("aaaa2")
+                        print("Logou um usuário")
                         break
                     if(codigo == "1"):
                         print("aq krlh2")
@@ -335,14 +334,16 @@ class MainWindow(QMainWindow):
                         widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
                         self.usuario = us
                         self.permis = 1
-                        print("aaaa3")
+                        print("Logou um adm")
 
                         break
                 elif int(msg2[0]) == 7:
                     widgets.titleRightInfo.setText(self.mensagens[7])
+                    print("Deu erro com o login")
                     break
     
     def validarCadastro(self,widgets,a):
+        print("pek")
         us = widgets.usuario_cad.text()
         sh = widgets.senha_cad.text()
 
@@ -355,14 +356,17 @@ class MainWindow(QMainWindow):
             if msg:
 
                 if int(msg) == 23:
+                    print("Deu erro com o cadastro")
                     widgets.titleRightInfo.setText(self.mensagens[23] + " Tente novamente.")
                     break
                 elif int(msg) == 24:
+                    print("Cadastrou e logou")
                     widgets.titleRightInfo.setText(self.mensagens[24]+f" Bem Vindo(a), {us}")
                     widgets.Login.setText(QCoreApplication.translate("MainWindow", u"Logado", None))
                     self.usuario = us
                     break
                 elif int(msg) == 22:
+                    print("erro aqui no cadstro")
                     widgets.titleRightInfo.setText(self.mensagens[22])
                     break
 
@@ -419,9 +423,17 @@ class MainWindow(QMainWindow):
                     widgets.titleRightInfo.setText(self.mensagens[int(msg)])
                 else:
                     lista_itens = msg.split("#")
-                    lista_itens.remove('')
+                    try:
+                        lista_itens.remove('')
+                    except:
+                        pass
                     for k in lista_itens:
                         novalista = k.split(";")
+
+                        print(novalista[0])
+                        print(novalista[1])
+                        print(novalista[2])
+                        print(novalista[3])
 
                         self.AlimentarHistorico(widgets,novalista[0],novalista[1],novalista[2],novalista[3])
                 

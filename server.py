@@ -102,7 +102,9 @@ class Main():
                         print("recebeu")
                     if ver[0] == 'cad':
                          Verificar = ver[1].split(";")
-                         cliente.send(str(self.Cadastro(Verificar[0],Verificar[1])).encode())
+                         rrr = self.Cadastro(Verificar[0],Verificar[1])
+                         print(rrr, "rrr aqui")
+                         cliente.send(str(rrr).encode())
 
 
 
@@ -143,11 +145,17 @@ class Main():
         print(nome)
         try:
             self.cursor.execute(f'SELECT * FROM usuario WHERE nome="{nome}";')
-            if(len(self.cursor.fetchall()) == 1):
+            print("Mandou o select")
+            tt = self.cursor.fetchall()
+            print(tt)
+            if(len(tt) == 1):
+                print("Esse usuário já existe")
                 self.banco.commit()
                 return 23
             else:
+                print("E vamos de mandar")
                 self.cursor.execute(f'INSERT INTO usuario(nome,senha,adm) VALUES("{nome}","{senha}",0)')
+                print("Mandou")
                 self.banco.commit()
                 return 24
             
