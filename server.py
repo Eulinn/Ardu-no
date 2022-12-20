@@ -2,6 +2,8 @@ import requests
 import socket
 from _thread import *
 import sqlite3
+import time
+from datetime import date
 
 class Main():
     def __init__(self) -> None:
@@ -42,18 +44,21 @@ class Main():
                 start_new_thread(self.controleCLiente,(client,0))
             
     
-    def EnviarComando(self,valor):
-        
+    def EnviarComando(self,valor,usuario):
 
         try:
             rq = requests.get(f'http://192.168.0.101/?relay{valor}')
             if (rq.text == r'[{relay0:off}]'):
+                self.adicionarhistorico(usuario,"Desligou PinOut0")
                 return 14
             elif (rq.text == r'[{relay0:on}]'):
+                self.adicionarhistorico(usuario,"Ligou PinOut0")
                 return 13
             elif (rq.text == r'[{relay2:off}]'):
+                self.adicionarhistorico(usuario,"Desligou PinOut2")
                 return 16
             elif (rq.text == r'[{relay2:on}]'):
+                self.adicionarhistorico(usuario,"Ligou PinOut2")
                 return 15
             elif (rq.text == r'[{relay0:justoff}]'):
                 return 18
@@ -80,16 +85,22 @@ class Main():
                         Verificar = ver[1].split(";")
                         if(self.verificarUsuario(Verificar[0],Verificar[1],cliente)):
                             print("passou login")
-                            
                         else:
                             cliente.send('5'.encode())
                     if ver[0] == 'pin':
-                        cliente.send(str(self.EnviarComando(ver[1])).encode())
-                    
+                        Verificar = ver[1].split(";")
+                        cliente.send(str(self.EnviarComando(Verificar[0],Verificar[1])).encode())
                     if ver[0] == 'bloq':
-                        pass
+                        Verificar = ver[1].split(";")
+                        cliente.send(str(self.bloquear(Verificar[0],Verificar[1])).encode())
+                    if ver[0] == 'desbloq':
+                        Verificar = ver[1].split(";")
+                        cliente.send(str(self.desbloquear(Verificar[0],Verificar[1])).encode())
+                    if ver[0] == 'hist':
+                        print("enviou")
+                        cliente.send(str(self.enviarhist(ver[1])).encode())
+                        print("recebeu")
 
-                    
 
                 except OSError as erro:
                     print(erro)
@@ -113,7 +124,6 @@ class Main():
                     cliente.send("6 1".encode())
                     print("aa2")
 
-
                 return True
             else:
                 self.banco.commit()
@@ -127,21 +137,103 @@ class Main():
 
     def Cadastro(self,nome,senha):
         try:
-            self.cursor.execute(f'SELECT * FROM usuario WHERE nome_usu = "{nome}"')
+            self.cursor.execute(f'SELECT * FROM usuario(nome,senha,adm) WHERE nome = "{nome}"')
             if(len(self.cursor.fetchall()) == 1):
                 self.banco.commit()
                 return 23
             else:
-                self.cursor.execute(f'INSERT INTO usuario values("{nome}","{senha}",1)')
+                self.cursor.execute(f'INSERT INTO usuario(nome,senha,adm) values("{nome}","{senha}",1)')
                 self.banco.commit()
                 return 24
         
         except:
             return 22
-
-            
-
     
+
+    def pegarID(self,usuario):
+        try:
+            self.cursor.execute(f'SELECT id_usu FROM usuario WHERE nome = "{usuario}"')
+            numero = self.cursor.fetchall()
+            self.banco.commit()
+            return numero[0][0]
+        
+        except OSError as erro:
+            print(erro)
+            return False
+    
+    def bloquear(self,usuario,dispositivo):
+        id = self.pegarID(usuario)
+        if(id != False):
+            usuario = id
+            try:
+                self.cursor.execute(f'INSERT INTO bloqueio(id_usu,dispositivo) VALUES({usuario},{dispositivo});')
+                self.banco.commit()
+                return 28
+            
+            except:
+                return 22
+        else:
+            return 22
+    
+    def desbloquear(self,usuario,dispositivo):
+        id = self.pegarID(usuario)
+        if(id != False):
+            usuario = id
+            try:
+                self.cursor.execute(f'DELETE FROM bloqueio WHERE id_usu = {usuario} and dispositivo = {dispositivo}')
+                self.banco.commit()
+                return 29
+            
+            except:
+                return 22
+        else:
+            return 22
+
+
+    def adicionarhistorico(self,usuario,acao):
+        id = self.pegarID(usuario)
+        if(id != False):
+            usuario = id
+
+            data = date.today()
+            hora = time.strftime("%H:%M:%S")
+
+            try:
+                self.cursor.execute(f'INSERT INTO historico(id_usu,data,horario,acao) VALUES({usuario},{data},{hora},{acao});')
+                self.banco.commit()
+            
+            except:
+                return
+
+        else:
+            return 22
+
+
+    def enviarhist(self,usuario):
+        id = self.pegarID(usuario)
+        if(id != False):
+            usuario = id
+
+            try:
+                self.cursor.execute(f'SELECT * FROM historico WHERE id_usu={usuario};')
+                listahist = self.cursor.fetchall()
+                self.banco.commit()
+
+                textofinal = ''
+                for j in listahist:
+                    texto2 = ''
+                    for k in j:
+                        texto2+=str(k)+';'
+                    textofinal+=texto2+'#'
+                
+                return textofinal
+
+            except OSError as err:
+                print(err)
+                return 30
+
+        else:
+            return 30
 
 
 

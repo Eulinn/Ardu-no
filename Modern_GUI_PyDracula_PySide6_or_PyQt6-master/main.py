@@ -62,7 +62,10 @@ class MainWindow(QMainWindow):
         "Cadastrado",#24
         "Conecte-se para acessar o histórico!",#25
         "Você não pode acessar essa função",#26
-        "Conecte-se para acessar essa função"#27
+        "Conecte-se para acessar essa função",#27
+        "Usuario Bloquado",#28
+        "Usuario Desbloquado",#29
+        "Não consegui receber o histórico"#30
         ]
 
         self.usuario = None
@@ -201,13 +204,13 @@ class MainWindow(QMainWindow):
         
 
         if btnName == 'Ligar1':
-            start_new_thread(self.enviarcomando,('pin-0=on',''))
+            start_new_thread(self.enviarcomando,(f'pin-0=on;{self.usuario}',''))
         if btnName == 'Ligar2':
-            start_new_thread(self.enviarcomando,('pin-2=on',''))
+            start_new_thread(self.enviarcomando,(f'pin-2=on;{self.usuario}',''))
         if btnName == 'Desligar1':
-            start_new_thread(self.enviarcomando,('pin-0=off',''))
+            start_new_thread(self.enviarcomando,(f'pin-0=off;{self.usuario}',''))
         if btnName == 'Desligar2':
-            start_new_thread(self.enviarcomando,('pin-2=off',''))
+            start_new_thread(self.enviarcomando,(f'pin-2=off;{self.usuario}',''))
         
         print(f"botao clicado {btnName}")
 
@@ -238,6 +241,7 @@ class MainWindow(QMainWindow):
                 widgets.stackedWidget.setCurrentWidget(widgets.Historico_page) # SET PAGE
                 UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+                start_new_thread(self.receberhistorico,(f"hist-{self.usuario}",None))
             else:
                 start_new_thread(self.MSGTemp,(25,2,widgets))
         
@@ -253,7 +257,19 @@ class MainWindow(QMainWindow):
                 start_new_thread(self.MSGTemp,(27,2,widgets))
         
         if btnName == "ADMenviar":
-            pass
+            if(widgets.UsuarioADM.text() != ''):
+                if widgets.bloq.isChecked():
+                    comand = 'bloq'
+                elif widgets.desbloq.isChecked():
+                    comand = 'desbloq'
+                
+                if widgets.disp1.isChecked():
+                    disp = 0
+                elif widgets.disp2.isChecked():
+                    disp = 2
+                final = f"{comand}-{widgets.UsuarioADM.text()};{disp}"
+                start_new_thread(self.enviarcomando,(final,None))
+
                 
 
 
@@ -372,15 +388,37 @@ class MainWindow(QMainWindow):
 
     def enviarcomando(self,comando,a):
         try:
+            print("indo primeiro")
             self.serverP.send(comando.encode())
+            print("enviou")
             while True:
                 msg = self.serverP.recv(32).decode('utf-8')
+                print("recebi")
                 if msg:
+                    print("Mensagem tem")
                     widgets.titleRightInfo.setText(self.mensagens[int(msg)])
                     break
         except OSError as erro:
             widgets.titleRightInfo.setText(self.mensagens[7])
             print(erro)
+
+    def receberhistorico(self,comando,a):
+        self.serverP.send(comando.encode())
+        print("enviou")
+        while True:
+            msg = self.serverP.recv(32).decode('utf-8')
+            if msg:
+                print("recebeu")
+                if msg == '30':
+                    widgets.titleRightInfo.setText(self.mensagens[int(msg)])
+                else:
+                    lista_itens = msg.split("#")
+                    lista_itens.remove('')
+                    for k in lista_itens:
+                        novalista = k.split(";")
+
+                        self.AlimentarHistorico(widgets,novalista[0],novalista[1],novalista[2],novalista[3])
+                
 
 
 if __name__ == "__main__":
