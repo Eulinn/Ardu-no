@@ -121,6 +121,7 @@ class MainWindow(QMainWindow):
         widgets.botaologin.clicked.connect(self.buttonClick)
         widgets.historico.clicked.connect(self.buttonClick)
         widgets.ADM.clicked.connect(self.buttonClick)
+        widgets.botaoenviar_cad.clicked.connect(self.buttonClick)
 
         widgets.botaoenviar.clicked.connect(self.buttonClick)
         widgets.btn_lig_1.clicked.connect(self.buttonClick)
@@ -226,10 +227,6 @@ class MainWindow(QMainWindow):
                 btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             else:
                 start_new_thread(self.MSGTemp,(11,2,widgets))
-        
-        if btnName == "Cadenviar":
-            if(widgets.usuario_cad.text() != "" and widgets.senha_cad.text() != ""):
-                start_new_thread(self.validarLogin,(widgets,None))
                 
 
         if btnName == "Logenviar" and self.usuario == None:
@@ -269,6 +266,11 @@ class MainWindow(QMainWindow):
                     disp = 2
                 final = f"{comand}-{widgets.UsuarioADM.text()};{disp}"
                 start_new_thread(self.enviarcomando,(final,None))
+        
+
+        if btnName == 'Cadenviar':
+            if(widgets.usuario_cad.text() != "" and widgets.senha_cad.text() != ""):
+                start_new_thread(self.validarCadastro,(widgets,None))
 
                 
 
@@ -345,10 +347,13 @@ class MainWindow(QMainWindow):
         sh = widgets.senha_cad.text()
 
         self.serverP.send(f'cad-{us};{sh}'.encode())
+
+
         while True:
             
             msg = self.serverP.recv(32).decode("utf-8")
             if msg:
+
                 if int(msg) == 23:
                     widgets.titleRightInfo.setText(self.mensagens[23] + " Tente novamente.")
                     break
@@ -360,6 +365,7 @@ class MainWindow(QMainWindow):
                 elif int(msg) == 22:
                     widgets.titleRightInfo.setText(self.mensagens[22])
                     break
+
 
 
     def server(self,widgets,a):

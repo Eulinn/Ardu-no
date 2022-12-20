@@ -100,6 +100,10 @@ class Main():
                         print("enviou")
                         cliente.send(str(self.enviarhist(ver[1])).encode())
                         print("recebeu")
+                    if ver[0] == 'cad':
+                         Verificar = ver[1].split(";")
+                         cliente.send(str(self.Cadastro(Verificar[0],Verificar[1])).encode())
+
 
 
                 except OSError as erro:
@@ -136,19 +140,23 @@ class Main():
 
 
     def Cadastro(self,nome,senha):
+        print(nome)
         try:
-            self.cursor.execute(f'SELECT * FROM usuario(nome,senha,adm) WHERE nome = "{nome}"')
+            self.cursor.execute(f'SELECT * FROM usuario WHERE nome="{nome}";')
             if(len(self.cursor.fetchall()) == 1):
                 self.banco.commit()
                 return 23
             else:
-                self.cursor.execute(f'INSERT INTO usuario(nome,senha,adm) values("{nome}","{senha}",1)')
+                self.cursor.execute(f'INSERT INTO usuario(nome,senha,adm) VALUES("{nome}","{senha}",0)')
                 self.banco.commit()
                 return 24
+            
         
-        except:
+        except OSError as err:
+            print(err)
             return 22
-    
+
+
 
     def pegarID(self,usuario):
         try:
