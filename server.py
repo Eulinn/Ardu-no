@@ -1,8 +1,5 @@
-import requests
-import socket
+import requests,socket,sqlite3,time
 from _thread import *
-import sqlite3
-import time
 from datetime import date
 
 class Main():
